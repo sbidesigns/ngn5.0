@@ -1,0 +1,61 @@
+/* NGN4 Shared - Chromatic Mind */
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#08080f;color:#e0e0e0;font-family:'Share Tech Mono',monospace;overflow:hidden;width:100vw;height: var(--ngn-vh)}
+#game-container{position:relative;width:100vw;height: var(--ngn-vh)}
+#gameCanvas{display:block;width:100%;height:100%;background:#08080f;touch-action:none}
+#ui-overlay{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10}
+#ui-overlay .screen,#ui-overlay button{pointer-events:auto}
+.hidden{display:none!important}
+#hud{position:absolute;top:0;left:0;width:100%;padding:8px 12px;background:linear-gradient(180deg,rgba(0,0,0,0.85),transparent);z-index:20}
+#hud-top{display:flex;justify-content:space-between;align-items:flex-start}
+#hud-left,#hud-right{min-width:100px}
+#hud-center{text-align:center}
+#level-display{font-family:'Orbitron',sans-serif;font-size:14px;color:#ff44ff;text-shadow:0 0 10px #ff44ff44}
+#moves-display{font-size:13px;color:#44aaff}
+#score-display{font-size:15px;color:#ffcc00;font-family:'Orbitron',sans-serif}
+#target-display{font-size:11px;color:#888}
+#combo-display{font-size:14px;color:#ff6600;font-family:'Orbitron',sans-serif}
+#coins-display{font-size:13px;color:#ffaa00;margin-top:2px}
+#hud-bottom{margin-top:4px;font-size:11px;color:#666}
+#timer-display{color:#00ffaa}
+.screen{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;background:rgba(4,4,10,0.93);z-index:30;padding:20px}
+.title-container{text-align:center;margin-bottom:24px}
+.ngn4-badge{display:inline-block;font-family:'Orbitron',sans-serif;font-size:14px;color:#ff44ff;border:1px solid #ff44ff44;padding:4px 16px;margin-bottom:12px;letter-spacing:4px}
+.game-title{font-family:'Orbitron',sans-serif;font-size:clamp(24px,5vw,42px);color:#fff;text-shadow:0 0 20px #ff44ff44;letter-spacing:3px}
+.game-subtitle{font-size:14px;color:#ff44ff88;margin-top:8px;letter-spacing:6px}
+.story-box{max-width:500px;text-align:center;padding:16px 24px;border-left:2px solid #ff44ff44;border-right:2px solid #ff44ff44;margin-bottom:24px;font-size:13px;line-height:1.6;color:#aaa}
+.highlight{color:#ff44ff}
+.menu-buttons{display:flex;flex-direction:column;gap:10px;align-items:center;margin-bottom:20px}
+.coin-display{font-size:16px;color:#ffaa00;margin-top:8px}
+.controls-info{font-size:11px;color:#555;text-align:center;line-height:1.8}
+.btn-primary{font-family:'Orbitron',sans-serif;font-size:16px;color:#000;background:linear-gradient(135deg,#ff44ff,#cc44cc);border:none;padding:12px 40px;cursor:pointer;letter-spacing:2px;border-radius:2px}
+.btn-primary:hover{box-shadow:0 0 20px #ff44ff44;transform:translateY(-1px)}
+.btn-secondary{font-family:'Share Tech Mono',monospace;font-size:14px;color:#aaa;background:transparent;border:1px solid #444;padding:10px 32px;cursor:pointer;border-radius:2px}
+.btn-secondary:hover{border-color:#ff44ff88;color:#ff44ff}
+.btn-ad{font-family:'Share Tech Mono',monospace;font-size:13px;color:#ffcc00;background:rgba(255,204,0,0.1);border:1px solid #ffcc0044;padding:8px 24px;cursor:pointer;border-radius:2px;margin:6px 0}
+#level-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:16px 0;max-width:400px;width:100%}
+.level-card{padding:14px 8px;background:#111;border:1px solid #333;text-align:center;cursor:pointer;transition:all 0.2s;border-radius:4px}
+.level-card:hover{border-color:#ff44ff66}
+.level-card.locked{opacity:0.3;cursor:not-allowed}
+.level-card .lc-num{font-family:'Orbitron',sans-serif;font-size:16px;color:#fff}
+.level-card .lc-stars{font-size:12px;color:#ffcc00;margin-top:4px}
+#li-stars,.lcomp-stars{font-size:32px;color:#ffcc00;margin:12px 0}
+#lcomp-stats,#v-stats{text-align:center;margin:16px 0;font-size:14px;line-height:2;color:#aaa}
+#lcomp-stats span,#v-stats span{color:#ffcc00}
+.victory-text{color:#ff44ff;font-size:14px;margin:12px 0}
+#hint-display{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:21;pointer-events:none}
+#hint-text{background:rgba(255,204,0,0.15);border:1px solid #ffcc0044;color:#ffcc00;padding:8px 20px;border-radius:4px;font-size:13px;animation:hintPulse 2s ease infinite}
+@keyframes hintPulse{0%,100%{opacity:1}50%{opacity:0.6}}
+#score-popup{position:absolute;z-index:25;pointer-events:none;font-family:'Orbitron',sans-serif;font-size:18px;color:#ffcc00;text-shadow:0 0 10px #ffcc0066;animation:scoreFloat 1s ease forwards}
+@keyframes scoreFloat{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-40px) scale(1.3)}}
+.ad-container{width:100%;max-width:400px;text-align:center}
+.ad-header{font-size:10px;color:#666;letter-spacing:3px;margin-bottom:12px}
+.ad-content{background:#111;border:1px solid #333;padding:20px;margin-bottom:12px}
+.ad-fake{text-align:center}
+.ad-game-preview{font-family:'Orbitron',sans-serif;font-size:24px;color:#ff6600;margin-bottom:12px}
+.ad-tagline{color:#888;font-size:12px;margin-bottom:16px}
+.ad-cta{display:inline-block;background:#ff6600;color:#000;padding:8px 24px;font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:2px;border-radius:2px}
+.ad-timer{font-size:12px;color:#666;margin-bottom:12px}
+.reward-progress{width:100%;height:8px;background:#222;border-radius:4px;overflow:hidden;margin:12px 0}
+.reward-bar{height:100%;background:linear-gradient(90deg,#ff44ff,#cc44cc);width:0%;transition:width 0.3s;border-radius:4px}
+.screen h2{font-family:'Orbitron',sans-serif;font-size:clamp(20px,4vw,32px);color:#fff;margin-bottom:8px}

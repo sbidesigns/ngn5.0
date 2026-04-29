@@ -1,0 +1,452 @@
+/* Grand Circuit - NGN4 Racing Styles */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+body {
+  background: #0a0a0f;
+  color: #e0e0e0;
+  font-family: 'Share Tech Mono', monospace;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: var(--ngn-vh);
+}
+
+#game-container {
+  position: relative;
+  width: 900px;
+  height: 700px;
+  background: #0d0d14;
+  border: 2px solid #1a1a2e;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.1), inset 0 0 60px rgba(0, 0, 0, 0.5);
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.accent { color: #0ff; text-shadow: 0 0 10px #0ff, 0 0 20px #0ff; }
+
+/* NGN4 Branding */
+#ngn4-brand {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #555;
+  letter-spacing: 2px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Screen System */
+.screen {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  padding: 20px;
+}
+.screen.active { display: flex; }
+.screen.overlay {
+  background: rgba(5, 5, 15, 0.92);
+  backdrop-filter: blur(4px);
+}
+
+/* Main Menu */
+.game-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 52px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 6px;
+  margin-bottom: 4px;
+  text-shadow: 0 0 20px rgba(0,255,255,0.3);
+}
+.subtitle {
+  font-size: 13px;
+  color: #666;
+  letter-spacing: 4px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+/* Neon Buttons */
+.neon-btn {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0ff;
+  background: rgba(0, 255, 255, 0.06);
+  border: 2px solid rgba(0, 255, 255, 0.4);
+  border-radius: 6px;
+  padding: 12px 40px;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  min-width: 220px;
+  text-align: center;
+}
+.neon-btn:hover {
+  background: rgba(0, 255, 255, 0.15);
+  border-color: #0ff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), inset 0 0 15px rgba(0, 255, 255, 0.1);
+  transform: scale(1.03);
+}
+.neon-btn:active { transform: scale(0.97); }
+.neon-btn.small { font-size: 11px; padding: 8px 20px; min-width: 120px; }
+.back-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  min-width: 120px;
+  font-size: 12px;
+  padding: 8px 20px;
+}
+
+/* Stats Bar */
+.stats-bar {
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+  color: #888;
+}
+.stats-bar span { color: #aaa; }
+
+/* Track Select */
+.track-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 700px;
+  margin-bottom: 20px;
+}
+.track-card {
+  background: rgba(0,255,255,0.04);
+  border: 2px solid rgba(0,255,255,0.2);
+  border-radius: 8px;
+  padding: 12px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.track-card:hover {
+  border-color: #0ff;
+  background: rgba(0,255,255,0.1);
+  box-shadow: 0 0 12px rgba(0,255,255,0.2);
+}
+.track-card.locked {
+  opacity: 0.4;
+  pointer-events: none;
+}
+.track-card .track-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #0ff;
+  margin-bottom: 4px;
+}
+.track-card .track-diff {
+  font-size: 9px;
+  color: #888;
+}
+.track-card .track-diff.star { color: #ff0; }
+
+/* HUD */
+#hud { pointer-events: none; z-index: 8; }
+#hud.active { display: block; }
+#hud-top {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 30px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 8px rgba(0,0,0,0.8);
+}
+#hud-lap { color: #0ff; }
+#hud-pos { font-size: 28px; }
+#hud-time { color: #aaa; }
+
+#hud-item-box {
+  position: absolute;
+  bottom: 70px;
+  left: 20px;
+  width: 56px;
+  height: 56px;
+  border: 2px solid rgba(0,255,255,0.5);
+  border-radius: 8px;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#hud-item-icon {
+  font-size: 28px;
+}
+#hud-speed {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  color: #0ff;
+}
+
+#hud-minimap {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  border: 2px solid rgba(0,255,255,0.3);
+  border-radius: 6px;
+  background: rgba(0,0,0,0.5);
+}
+#minimapCanvas { display: block; }
+
+#hud-countdown {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 80px;
+  font-weight: 900;
+  color: #0ff;
+  text-shadow: 0 0 30px #0ff, 0 0 60px #0ff;
+  z-index: 12;
+}
+.hidden { display: none !important; }
+
+/* Mobile Touch Controls */
+#hud-mobile-controls {
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  pointer-events: all;
+}
+.touch-zone {
+  position: absolute;
+  bottom: 0;
+  width: 33%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  color: rgba(0,255,255,0.3);
+  border: 1px solid rgba(0,255,255,0.1);
+  background: rgba(0,255,255,0.03);
+  border-radius: 8px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+.touch-left { left: 5px; width: 30%; }
+.touch-right { left: 35%; width: 30%; }
+.touch-item { right: 5px; width: 30%; font-size: 14px; font-family: 'Orbitron', sans-serif; }
+
+@media (pointer: coarse) {
+  #hud-mobile-controls { display: block; }
+}
+
+/* Results Screen */
+#results-screen h2, #standings-screen h2,
+#victory-screen h2, #garage-screen h2,
+#achievements-screen h2, #controls-screen h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 28px;
+  color: #0ff;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(0,255,255,0.3);
+}
+
+#results-positions, #standings-table {
+  width: 400px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+.result-row, .standing-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.result-row.player, .standing-row.player {
+  background: rgba(0,255,255,0.1);
+  color: #0ff;
+  font-weight: bold;
+  border-radius: 4px;
+}
+.result-pos { width: 40px; color: #888; }
+.result-name { flex: 1; }
+.result-time { width: 90px; color: #aaa; text-align: right; }
+.standing-pos { width: 40px; color: #888; }
+.standing-name { flex: 1; }
+.standing-pts { width: 50px; text-align: right; color: #0ff; }
+
+#results-stats {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #888;
+  text-align: center;
+}
+#results-rewards {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #ff0;
+  text-align: center;
+}
+
+.victory-text {
+  font-size: 36px !important;
+  color: #ff0 !important;
+  text-shadow: 0 0 20px #ff0, 0 0 40px #ff0 !important;
+  animation: victoryPulse 1s ease-in-out infinite;
+}
+@keyframes victoryPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Garage */
+#garage-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.garage-stat {
+  background: rgba(0,255,255,0.05);
+  border: 1px solid rgba(0,255,255,0.2);
+  border-radius: 6px;
+  padding: 8px;
+  text-align: center;
+}
+.garage-stat .stat-label { font-size: 10px; color: #888; }
+.garage-stat .stat-val { font-size: 18px; color: #0ff; font-family: 'Orbitron', sans-serif; }
+
+#garage-upgrades {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.upgrade-btn {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  color: #0ff;
+  background: rgba(0,255,255,0.06);
+  border: 1px solid rgba(0,255,255,0.3);
+  border-radius: 4px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.upgrade-btn:hover { background: rgba(0,255,255,0.15); border-color: #0ff; }
+.upgrade-btn.maxed { color: #555; border-color: #333; pointer-events: none; }
+#garage-coins {
+  font-size: 16px;
+  color: #ff0;
+  margin-bottom: 10px;
+}
+
+/* Achievements */
+#achievements-list {
+  width: 500px;
+  max-height: 350px;
+  overflow-y: auto;
+}
+.achievement-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.achievement-row.unlocked { color: #0ff; }
+.achievement-row.locked { color: #444; }
+.achievement-icon { font-size: 22px; }
+.achievement-info { flex: 1; }
+.achievement-name { font-size: 13px; font-weight: bold; }
+.achievement-desc { font-size: 11px; color: #666; }
+
+/* Controls Info */
+.controls-info {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #aaa;
+  text-align: left;
+  max-width: 400px;
+}
+.controls-info strong { color: #0ff; font-size: 14px; }
+
+/* Ad Screens */
+.ad-box {
+  text-align: center;
+  padding: 30px;
+  background: rgba(0,0,0,0.8);
+  border: 2px solid #222;
+  border-radius: 12px;
+}
+.ad-label {
+  font-size: 10px;
+  color: #666;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+.ad-text {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 24px;
+  color: #fff;
+  margin: 10px 0;
+}
+.ad-sub { color: #888; font-size: 13px; margin-bottom: 15px; }
+.ad-placeholder {
+  width: 300px;
+  height: 150px;
+  background: linear-gradient(135deg, #0a1a2a, #1a0a2a);
+  border: 1px solid #222;
+  border-radius: 8px;
+  margin: 0 auto 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  font-size: 12px;
+}
+.ad-timer { color: #888; font-size: 13px; margin-top: 10px; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #0ff; border-radius: 2px; }

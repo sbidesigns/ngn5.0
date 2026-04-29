@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="viewport-fit=cover,width=device-width, initial-scale=1.0">
+<title>NGN4 — Deep Cast</title>
+<link rel="stylesheet" href="style.css">
+<script>
+/* NGN4 Engine — Inline Bundle */
+/* === ngn4-viewport-fix.js === */
+/* NGN4 Viewport Fix — Polyfill for dvh on mobile browsers */
+(function() {
+  function updateViewport() {
+    const h = window.innerHeight;
+    const w = window.innerWidth;
+    document.documentElement.style.setProperty('--ngn-vh', h + 'px');
+    document.documentElement.style.setProperty('--ngn-vw', w + 'px');
+  }
+  updateViewport();
+  window.addEventListener('resize', updateViewport);
+  window.addEventListener('orientationchange', function() { setTimeout(updateViewport, 100); });
+
+  // Also update on visual viewport resize ( Safari address bar )
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', updateViewport);
+  }
+})();
+
+/* === ngn4-core.js === */
+/* NGN4 Core — Shared game utilities: NGN4 global, audio shim, coins, rewards */
+(function() {
+  'use strict';
+
+  var REWARDS_KEY = 'ngn4_rewards';
+
+  /* ── Audio shim (Web Audio API procedural sounds) ── */
+  var _audioCtx = null;
+  function _getCtx() {
+    if (!_audioCtx) {
+      try { _audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
+    }
+    if (_audioCtx && _audioCtx.state === 'suspended') _audioCtx.resume();
+    return _audioCtx;
+  }
+
+  // Minimal procedural sound generator — doesn't crash if AudioContext unavailable
+  function _playTone(freq, duration, type, vol) {
+    try {
+      var ctx = _getCtx();
+      if (!ctx) return;
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.type = type || 'square';
+      osc.frequency.setValueAtTime(freq, ctx.currentTime);
+      gain.gain.setValueAtTime(vol || 0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + (duration || 0.1));
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + (duration || 0.1));
+    } catch(e) {}
+  }
+
+  var SOUNDS = {
+    shoot:      function() { _playTone(800, 0.08, 'square', 0.06); },
+    hit:        function() { _playTone(200, 0.12, 'sawtooth', 0.07); },
+    explode:    function() { _playTone(100, 0.25, 'sawtooth', 0.09); _playTone(60, 0.3, 'sine', 0.06); },
+    pickup:     function() { _playTone(600, 0.08, 'sine', 0.05); _playTone(900, 0.08, 'sine', 0.05); },
+    jump:       function() { _playTone(400, 0.06, 'square', 0.04); _playTone(700, 0.06, 'square', 0.04); },
+    doublejump: function() { _playTone(600, 0.06, 'square', 0.04); _playTone(1000, 0.08, 'square', 0.05); },
+    walljump:   function() { _playTone(500, 0.08, 'triangle', 0.05); },
+    crystal:    function() { _playTone(800, 0.06, 'sine', 0.05); _playTone(1200, 0.1, 'sine', 0.05); },
+    key:        function() { _playTone(500, 0.08, 'sine', 0.06); _playTone(750, 0.08, 'sine', 0.06); _playTone(1000, 0.12, 'sine', 0.06); },
+    door:       function() { _playTone(300, 0.15, 'triangle', 0.06); _playTone(450, 0.15, 'triangle', 0.06); },
+    checkpoint: function() { _playTone(600, 0.1, 'sine', 0.05); _playTone(800, 0.1, 'sine', 0.05); _playTone(1000, 0.15, 'sine', 0.06); },
+    bounce:     function() { _playTone(350, 0.06, 'square', 0.04); },
+    stomp:      function() { _playTone(250, 0.1, 'square', 0.06); _playTone(500, 0.08, 'square', 0.04); },
+    levelup:    function() { [500,700,900,1100].forEach(function(f,i){ setTimeout(function(){ _playTone(f, 0.15, 'sine', 0.06); }, i*80); }); },
+    upgrade:    function() { _playTone(600, 0.1, 'sine', 0.05); _playTone(900, 0.15, 'sine', 0.06); },
+    achieve:    function() { [600,800,1000,1200,1400].forEach(function(f,i){ setTimeout(function(){ _playTone(f, 0.12, 'sine', 0.06); }, i*60); }); },
+    boost:      function() { _playTone(300, 0.08, 'sawtooth', 0.05); _playTone(600, 0.12, 'sawtooth', 0.07); },
+    item:       function() { _playTone(700, 0.06, 'sine', 0.05); _playTone(1000, 0.08, 'sine', 0.05); },
+    shield:     function() { _playTone(400, 0.1, 'triangle', 0.04); _playTone(600, 0.1, 'triangle', 0.04); },
+    heal:       function() { _playTone(500, 0.1, 'sine', 0.05); _playTone(800, 0.15, 'sine', 0.05); },
+    damage:     function() { _playTone(150, 0.15, 'sawtooth', 0.08); },
+    click:      function() { _playTone(1000, 0.03, 'sine', 0.03); },
+    coin:       function() { _playTone(1200, 0.05, 'sine', 0.04); _playTone(1600, 0.06, 'sine', 0.04); },
+    engine:     function() { /* silent — engine noise is continuous */ },
+    horn:       function() { _playTone(400, 0.2, 'sawtooth', 0.06); },
+    drift:      function() { _playTone(200, 0.15, 'sawtooth', 0.04); },
+    race_start: function() { [300,400,600,800].forEach(function(f,i){ setTimeout(function(){ _playTone(f, 0.12, 'square', 0.06); }, i*150); }); },
+    miss:       function() { _playTone(200, 0.15, 'sawtooth', 0.06); },
+    correct:    function() { _playTone(600, 0.08, 'sine', 0.05); _playTone(900, 0.1, 'sine', 0.05); },
+    wrong:      function() { _playTone(200, 0.2, 'sawtooth', 0.06); },
+    tick:       function() { _playTone(1000, 0.02, 'sine', 0.02); },
+    place:      function() { _playTone(500, 0.06, 'square', 0.04); },
+    destroy:    function() { _playTone(150, 0.2, 'sawtooth', 0.07); },
+    cast:       function() { _playTone(400, 0.15, 'triangle', 0.05); _playTone(800, 0.2, 'triangle', 0.06); },
+    bite:       function() { _playTone(300, 0.1, 'sawtooth', 0.06); _playTone(500, 0.08, 'sawtooth', 0.04); },
+    splash:     function() { _playTone(200, 0.15, 'sine', 0.04); }
+  };
+
+  /* ── Rewards persistence (shared across all games) ── */
+  var _rewardsCache = null;
+
+  function _loadRewards() {
+    if (_rewardsCache) return _rewardsCache;
+    try {
+      var s = localStorage.getItem(REWARDS_KEY);
+      if (s) _rewardsCache = JSON.parse(s);
+    } catch(e) {}
+    if (!_rewardsCache) {
+      _rewardsCache = { coins: 0, gems: 0, xp: 0, level: 1, totalPlaytime: 0, gamesPlayed: 0, gamesWon: 0, highScores: {}, achievements: [], unlockedItems: ['starter_pack'], dailyStreak: 0, lastDailyClaim: null, settings: { music: 0.5, sfx: 0.8, adsEnabled: true, notifications: true } };
+    }
+    return _rewardsCache;
+  }
+
+  function _saveRewards(data) {
+    if (data) _rewardsCache = data;
+    try { localStorage.setItem(REWARDS_KEY, JSON.stringify(_rewardsCache)); } catch(e) {}
+  }
+
+  /* ── NGN4 global object ── */
+  window.NGN4 = {
+    playSound: function(name) {
+      try {
+        var vol = window.NGN4Settings ? window.NGN4Settings.get('sfxVolume') : 0.7;
+        if (vol <= 0) return;
+        if (SOUNDS[name]) SOUNDS[name]();
+      } catch(e) {}
+    },
+
+    addCoins: function(amount) {
+      var r = _loadRewards();
+      r.coins = Math.max(0, (r.coins || 0) + amount);
+      _saveRewards(r);
+      return r.coins;
+    },
+
+    getCoins: function() {
+      return _loadRewards().coins || 0;
+    },
+
+    addGems: function(amount) {
+      var r = _loadRewards();
+      r.gems = Math.max(0, (r.gems || 0) + amount);
+      _saveRewards(r);
+      return r.gems;
+    },
+
+    getGems: function() {
+      return _loadRewards().gems || 0;
+    },
+
+    loadRewards: function() {
+      return _loadRewards();
+    },
+
+    saveRewards: function(data) {
+      _saveRewards(data);
+    },
+
+    getRewards: function() {
+      return JSON.parse(JSON.stringify(_loadRewards()));
+    },
+
+    resetRewards: function() {
+      _rewardsCache = { coins: 0, gems: 0, xp: 0, level: 1, totalPlaytime: 0, gamesPlayed: 0, gamesWon: 0, highScores: {}, achievements: [], unlockedItems: ['starter_pack'], dailyStreak: 0, lastDailyClaim: null, settings: { music: 0.5, sfx: 0.8, adsEnabled: true, notifications: true } };
+      _saveRewards(_rewardsCache);
+    }
+  };
+})();
+
+/* === ngn4-settings.js === */
+/* NGN4 Settings Menu — Universal settings overlay for all NGN4 games */
+(function() {
+  'use strict';
+
+  const STORAGE_KEY = 'ngn4_settings';
+  const defaults = {
+    sfxVolume: 0.7,
+    musicVolume: 0.5,
+    screenShake: true,
+    particles: true,
+    showFPS: false,
+    difficulty: 'normal'
+  };
+
+  window.NGN4Settings = {
+    _data: null,
+    _el: null,
+    _visible: false,
+    _callbacks: {},
+
+    init(opts) {
+      this._data = Object.assign({}, defaults);
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if (saved) Object.assign(this._data, saved);
+      } catch(e) {}
+      if (opts) Object.assign(this._data, opts);
+      this._createUI();
+      this._bindKeys();
+    },
+
+    get(key) { return this._data[key]; },
+    set(key, val) { this._data[key] = val; this._save(); },
+
+    _save() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(this._data)); } catch(e) {}
+    },
+
+    on(key, cb) {
+      if (!this._callbacks[key]) this._callbacks[key] = [];
+      this._callbacks[key].push(cb);
+    },
+
+    _emit(key, val) {
+      (this._callbacks[key] || []).forEach(cb => cb(val));
+    },
+
+    _createUI() {
+      if (this._el) return;
+      const el = document.createElement('div');
+      el.id = 'ngn4-settings-overlay';
+      el.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;display:none;flex-direction:column;align-items:center;justify-content:center;font-family:monospace;color:#fff;padding:20px;box-sizing:border-box';
+      el.innerHTML = `
+        <div style="max-width:400px;width:100%;background:#111;border:2px solid #0ff;border-radius:12px;padding:24px;box-shadow:0 0 30px rgba(0,255,255,0.2)">
+          <h2 style="margin:0 0 20px;text-align:center;color:#0ff;font-size:20px;letter-spacing:2px">SETTINGS</h2>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div class="ngn4-setting-row">
+              <label style="flex:1;font-size:13px">SFX Volume</label>
+              <input type="range" min="0" max="100" value="${this._data.sfxVolume*100}" class="ngn4-setting-slider" data-key="sfxVolume" style="width:140px;accent-color:#0ff">
+              <span class="ngn4-setting-val" style="width:35px;text-align:right;font-size:12px;color:#0ff">${Math.round(this._data.sfxVolume*100)}%</span>
+            </div>
+            <div class="ngn4-setting-row">
+              <label style="flex:1;font-size:13px">Music Volume</label>
+              <input type="range" min="0" max="100" value="${this._data.musicVolume*100}" class="ngn4-setting-slider" data-key="musicVolume" style="width:140px;accent-color:#0ff">
+              <span class="ngn4-setting-val" style="width:35px;text-align:right;font-size:12px;color:#0ff">${Math.round(this._data.musicVolume*100)}%</span>
+            </div>
+            <div class="ngn4-setting-row" style="justify-content:space-between;align-items:center">
+              <label style="font-size:13px">Screen Shake</label>
+              <button class="ngn4-setting-toggle ${this._data.screenShake?'active':''}" data-key="screenShake" style="padding:6px 18px;border:1px solid #0ff;background:${this._data.screenShake?'#0ff2':'transparent'};color:${this._data.screenShake?'#000':'#0ff'};font-family:monospace;font-size:12px;cursor:pointer;border-radius:4px">${this._data.screenShake?'ON':'OFF'}</button>
+            </div>
+            <div class="ngn4-setting-row" style="justify-content:space-between;align-items:center">
+              <label style="font-size:13px">Particles</label>
+              <button class="ngn4-setting-toggle ${this._data.particles?'active':''}" data-key="particles" style="padding:6px 18px;border:1px solid #0ff;background:${this._data.particles?'#0ff2':'transparent'};color:${this._data.particles?'#000':'#0ff'};font-family:monospace;font-size:12px;cursor:pointer;border-radius:4px">${this._data.particles?'ON':'OFF'}</button>
+            </div>
+            <div class="ngn4-setting-row" style="justify-content:space-between;align-items:center">
+              <label style="font-size:13px">Show FPS</label>
+              <button class="ngn4-setting-toggle ${this._data.showFPS?'active':''}" data-key="showFPS" style="padding:6px 18px;border:1px solid #0ff;background:${this._data.showFPS?'#0ff2':'transparent'};color:${this._data.showFPS?'#000':'#0ff'};font-family:monospace;font-size:12px;cursor:pointer;border-radius:4px">${this._data.showFPS?'ON':'OFF'}</button>
+            </div>
+          </div>
+          <div style="margin-top:24px;text-align:center">
+            <button id="ngn4-settings-close" style="padding:10px 40px;background:#0ff;color:#000;border:none;font-family:monospace;font-size:14px;font-weight:bold;cursor:pointer;border-radius:6px;letter-spacing:1px">CLOSE</button>
+          </div>
+          <div style="margin-top:12px;text-align:center;font-size:10px;color:#555">ESC to toggle</div>
+        </div>
+      `;
+      document.body.appendChild(el);
+      this._el = el;
+      this._fpsEl = null;
+
+      // Bind sliders
+      el.querySelectorAll('.ngn4-setting-slider').forEach(slider => {
+        slider.addEventListener('input', () => {
+          const key = slider.dataset.key;
+          const val = slider.value / 100;
+          this._data[key] = val;
+          slider.nextElementSibling.textContent = Math.round(val*100) + '%';
+          this._save();
+          this._emit(key, val);
+        });
+      });
+
+      // Bind toggles
+      el.querySelectorAll('.ngn4-setting-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const key = btn.dataset.key;
+          this._data[key] = !this._data[key];
+          const active = this._data[key];
+          btn.textContent = active ? 'ON' : 'OFF';
+          btn.style.background = active ? '#0ff2' : 'transparent';
+          btn.style.color = active ? '#000' : '#0ff';
+          btn.classList.toggle('active', active);
+          this._save();
+          this._emit(key, active);
+        });
+      });
+
+      document.getElementById('ngn4-settings-close').addEventListener('click', () => this.hide());
+    },
+
+    _bindKeys() {
+      // ESC toggles settings (only when not in game menu)
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && e.shiftKey) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.toggle();
+        }
+      });
+    },
+
+    show() {
+      if (!this._el) this._createUI();
+      this._el.style.display = 'flex';
+      this._visible = true;
+      if (window._ngn4GameLoop && window._ngn4GameLoop.paused === undefined) {
+        window._ngn4GameLoop._wasRunning = window._ngn4GameLoop._running;
+      }
+    },
+
+    hide() {
+      if (!this._el) return;
+      this._el.style.display = 'none';
+      this._visible = false;
+    },
+
+    toggle() {
+      if (this._visible) this.hide();
+      else this.show();
+    },
+
+    isVisible() { return this._visible; },
+
+    // FPS counter
+    updateFPS() {
+      if (!this._data.showFPS) {
+        if (this._fpsEl) this._fpsEl.remove();
+        this._fpsEl = null;
+        return;
+      }
+      if (!this._fpsEl) {
+        this._fpsEl = document.createElement('div');
+        this._fpsEl.style.cssText = 'position:fixed;top:4px;right:4px;color:#0f0;font:12px monospace;z-index:9998;background:rgba(0,0,0,0.6);padding:2px 6px;border-radius:3px';
+        this._fpsEl.textContent = 'FPS: --';
+        document.body.appendChild(this._fpsEl);
+      }
+    },
+
+    renderFPS(fps) {
+      if (this._fpsEl) this._fpsEl.textContent = 'FPS: ' + fps;
+    }
+  };
+})();
+
+/* === ngn4-achievements-inline.js === */
+/* NGN4 Achievements — Inline IIFE for all NGN4 games */
+(function() {
+  'use strict';
+
+  const STORAGE_KEY = 'ngn4_achievements';
+
+  window.NGN4Achievements = {
+    gameData: null,
+    globalData: null,
+    pendingPopups: [],
+    checks: {},
+    gameId: null,
+
+    init(gameId) {
+      this.gameId = gameId;
+      this.globalData = this._loadGlobal();
+      this.gameData = this._loadGame(gameId);
+      this._injectPopupContainer();
+    },
+
+    _loadGlobal() {
+      try {
+        const s = localStorage.getItem(STORAGE_KEY);
+        if (s) return JSON.parse(s);
+      } catch(e) {}
+      return { unlocked:[], totalGamesPlayed:0, totalGamesWon:0, totalScore:0, totalCoinsEarned:0, totalPlaytime:0, level:1, xp:0, streak:0, lastPlayDate:null };
+    },
+
+    _loadGame(id) {
+      try {
+        const s = localStorage.getItem(STORAGE_KEY + '_' + id);
+        if (s) return JSON.parse(s);
+      } catch(e) {}
+      return { highScore:0, gamesPlayed:0, gamesWon:0, totalKills:0, totalCoins:0, level:1, xp:0, stats:{}, unlocked:[], milestones:{} };
+    },
+
+    _saveGlobal() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(this.globalData)); } catch(e) {} },
+    _saveGame() { try { localStorage.setItem(STORAGE_KEY + '_' + this.gameId, JSON.stringify(this.gameData)); } catch(e) {} },
+
+    _xpForLevel(lv) { return Math.floor(100 * Math.pow(1.25, lv - 1)); },
+
+    addXP(amount, isGameLevel) {
+      if (isGameLevel) {
+        this.gameData.xp += amount;
+        const needed = this._xpForLevel(this.gameData.level);
+        while (this.gameData.xp >= needed) {
+          this.gameData.xp -= needed;
+          this.gameData.level++;
+          this._addPopup({ type:'levelup', text:'Level ' + this.gameData.level + '!', color:'#0f0', icon:'\u2B06\uFE0F' });
+        }
+        this._saveGame();
+      } else {
+        this.globalData.xp += amount;
+        const needed = this._xpForLevel(this.globalData.level);
+        while (this.globalData.xp >= needed) {
+          this.globalData.xp -= needed;
+          this.globalData.level++;
+          this._addPopup({ type:'global_levelup', text:'NGN Level ' + this.globalData.level + '!', color:'#ff0', icon:'\u2B50' });
+        }
+        this._saveGlobal();
+      }
+    },
+
+    getGameLevel() { return this.gameData ? this.gameData.level : 1; },
+    getGlobalLevel() { return this.globalData ? this.globalData.level : 1; },
+
+    registerCheck(id, conditionFn, name, desc, rewards) {
+      this.checks[id] = { condition: conditionFn, name: name, desc: desc, rewards: Object.assign({coins:50, gems:2, xp:100}, rewards||{}) };
+    },
+
+    runChecks() {
+      for (const id in this.checks) {
+        try {
+          if (this.checks[id].condition()) {
+            var c = this.checks[id];
+            this.unlock(id, c.name, c.desc, c.rewards);
+          }
+        } catch(e) {}
+      }
+    },
+
+    unlock(id, name, desc, rewards) {
+      var rw = Object.assign({coins:50, gems:2, xp:100}, rewards||{});
+      var globalKey = this.gameId + '_' + id;
+      if (this.globalData.unlocked.indexOf(globalKey) >= 0) return false;
+      if (this.gameData.unlocked.indexOf(id) >= 0) return false;
+      this.gameData.unlocked.push(id);
+      this.globalData.unlocked.push(globalKey);
+      this.gameData.totalCoins += rw.coins;
+      this.globalData.totalCoinsEarned += rw.coins;
+      this.addXP(rw.xp, false);
+      this._addPopup({ type:'achievement', id:id, name:name, desc:desc, text: rw.coins + ' coins + ' + rw.gems + ' gems + ' + rw.xp + ' XP', color:'#0ff', icon:'\uD83C\uDFC6', rewards:rw });
+      this._saveGlobal();
+      this._saveGame();
+      return true;
+    },
+
+    isUnlocked(id) { return this.gameData ? this.gameData.unlocked.indexOf(id) >= 0 : false; },
+    getHighScore() { return this.gameData ? this.gameData.highScore : 0; },
+    getGamesPlayed() { return this.gameData ? this.gameData.gamesPlayed : 0; },
+    getGamesWon() { return this.gameData ? this.gameData.gamesWon : 0; },
+
+    trackStat(key, val) {
+      if (!this.gameData) return;
+      if (!this.gameData.stats[key]) this.gameData.stats[key] = 0;
+      this.gameData.stats[key] += (val || 1);
+      this._saveGame();
+    },
+
+    getStat(key) { return (this.gameData && this.gameData.stats[key]) || 0; },
+
+    recordGame(score, won, kills, coins, playtime) {
+      if (!this.gameData || !this.globalData) return;
+      this.gameData.gamesPlayed++;
+      this.globalData.totalGamesPlayed++;
+      this.gameData.totalKills += (kills || 0);
+      this.gameData.totalCoins += (coins || 0);
+      this.globalData.totalCoinsEarned += (coins || 0);
+      this.globalData.totalPlaytime += (playtime || 0);
+      if (score > this.gameData.highScore) {
+        this.gameData.highScore = score;
+        this._addPopup({ type:'highscore', text:'New High Score: ' + score, color:'#ff0', icon:'\uD83C\uDFC6' });
+      }
+      if (won) {
+        this.gameData.gamesWon++;
+        this.globalData.totalGamesWon++;
+        this.addXP(50, true);
+        this.addXP(25, false);
+        var today = new Date().toDateString();
+        if (this.globalData.lastPlayDate !== today) {
+          var yesterday = new Date(Date.now() - 86400000).toDateString();
+          this.globalData.streak = (this.globalData.lastPlayDate === yesterday) ? this.globalData.streak + 1 : 1;
+          this.globalData.lastPlayDate = today;
+        }
+      } else {
+        this.addXP(10, true);
+        this.addXP(5, false);
+      }
+      this._saveGame();
+      this._saveGlobal();
+      this.runChecks();
+    },
+
+    _addPopup(popup) { this.pendingPopups.push(Object.assign({}, popup, {time: Date.now()})); },
+
+    _injectPopupContainer() {
+      if (document.getElementById('ngn4-ach-container')) return;
+      var c = document.createElement('div');
+      c.id = 'ngn4-ach-container';
+      c.style.cssText = 'position:fixed;top:0;left:0;width:100%;pointer-events:none;z-index:10000';
+      document.body.appendChild(c);
+    },
+
+    renderPopups() {
+      var container = document.getElementById('ngn4-ach-container');
+      if (!container) return;
+      var popups = this.pendingPopups.splice(0);
+      popups.forEach(function(p) {
+        var el = document.createElement('div');
+        el.style.cssText = 'position:absolute;top:-80px;left:50%;transform:translateX(-50%);padding:12px 24px;border-radius:8px;background:rgba(0,0,0,0.92);border:2px solid ' + (p.color||'#0ff') + ';color:#fff;font-family:monospace;font-size:14px;text-align:center;max-width:350px;transition:top 0.5s ease;pointer-events:auto;box-shadow:0 0 20px ' + (p.color||'#0ff') + '40';
+        el.innerHTML = '<div style="font-size:20px;margin-bottom:4px">' + (p.icon||'\uD83C\uDFC6') + '</div>' +
+          '<div style="color:' + (p.color||'#0ff') + ';font-weight:bold;font-size:16px">' + p.text + '</div>' +
+          (p.name ? '<div style="color:#aaa;font-size:12px;margin-top:2px">' + p.name + (p.desc ? ': ' + p.desc : '') + '</div>' : '');
+        container.appendChild(el);
+        requestAnimationFrame(function() { el.style.top = '60px'; });
+        setTimeout(function() {
+          el.style.top = '-80px';
+          setTimeout(function() { el.remove(); }, 500);
+        }, 3000);
+      });
+    },
+
+    renderXPBar(ctx, canvas, x, y, w, h) {
+      if (!this.gameData) return;
+      var lv = this.gameData.level;
+      var xp = this.gameData.xp;
+      var needed = this._xpForLevel(lv);
+      var pct = Math.min(1, xp / needed);
+      ctx.fillStyle = 'rgba(0,0,0,0.5)';
+      ctx.fillRect(x, y, w, h);
+      ctx.fillStyle = '#0ff4';
+      ctx.fillRect(x, y, w * pct, h);
+      ctx.strokeStyle = '#0ff6';
+      ctx.strokeRect(x, y, w, h);
+      ctx.fillStyle = '#fff';
+      ctx.font = (h - 4) + 'px monospace';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('Lv.' + lv, x + w / 2, y + h / 2);
+    }
+  };
+})();
+</script>
+</head>
+<body>
+<div id="game-container">
+  <div id="header">
+    <div class="brand">NGN4 <span class="accent">DEEP CAST</span></div>
+    <div class="coins-display">🪙 <span id="coins">0</span></div>
+  </div>
+  <div id="menu-screen">
+    <h1>🐟 DEEP CAST</h1>
+    <p class="story">The Deep Waters hold secrets and treasures.<br>Cast your line into the abyss and discover what lurks below.</p>
+    <div class="menu-options">
+      <div class="menu-row">
+        <button class="btn primary-btn" id="fish-btn">🎣 Go Fishing</button>
+        <button class="btn" id="shop-btn">🏪 Bait Shop</button>
+        <button class="btn" id="journal-btn">📖 Journal</button>
+      </div>
+      <div class="menu-row">
+        <button class="btn" id="equip-btn">🔧 Equipment</button>
+        <button class="btn" id="challenge-btn">🎯 Challenges</button>
+      </div>
+      <div id="location-select">
+        <label>Location:</label>
+        <div class="location-btns">
+          <button class="btn loc-btn active" data-loc="pond">Pond</button>
+          <button class="btn loc-btn" data-loc="river">River</button>
+          <button class="btn loc-btn" data-loc="ocean">Ocean</button>
+          <button class="btn loc-btn" data-loc="deep">Deep Sea</button>
+          <button class="btn loc-btn" data-loc="abyss">Abyss</button>
+        </div>
+      </div>
+      <div id="player-stats"></div>
+    </div>
+  </div>
+  <div id="fishing-screen" style="display:none;">
+    <div id="fish-hud">
+      <span id="location-name">Pond</span>
+      <span id="weather-display">☀ Clear</span>
+      <span id="fish-count">🐟 0</span>
+    </div>
+    <canvas id="fishing-canvas" width="500" height="500"></canvas>
+    <div id="fish-actions">
+      <button class="btn primary-btn" id="cast-btn">🎣 CAST LINE</button>
+      <button class="btn" id="reel-btn" style="display:none;">🔄 REEL IN</button>
+      <button class="btn" id="back-btn">← Back</button>
+    </div>
+    <div id="fish-message"></div>
+  </div>
+  <div id="shop-screen" style="display:none;">
+    <h2>🏪 BAIT SHOP</h2>
+    <p>Your coins: 🪙 <span id="shop-coins">0</span></p>
+    <div id="shop-items"></div>
+    <button class="btn" id="shop-back">← Back</button>
+  </div>
+  <div id="journal-screen" style="display:none;">
+    <h2>📖 Fish Journal</h2>
+    <p id="journal-progress"></p>
+    <div id="journal-list"></div>
+    <button class="btn" id="journal-back">← Back</button>
+  </div>
+  <div id="equip-screen" style="display:none;">
+    <h2>🔧 Equipment</h2>
+    <div id="equip-list"></div>
+    <button class="btn" id="equip-back">← Back</button>
+  </div>
+  <div id="catch-screen" style="display:none;">
+    <h2 id="catch-title">🎉 CATCH!</h2>
+    <div id="catch-info"></div>
+    <div id="catch-actions">
+      <button class="btn" id="sell-btn">💰 Sell</button>
+      <button class="btn" id="keep-btn">📦 Keep</button>
+    </div>
+  </div>
+  <div id="result-screen" style="display:none;">
+    <h2>Session Over</h2>
+    <div id="result-stats"></div>
+    <div id="rewards-earned"></div>
+    <div id="ad-mockup" class="ad-container">
+      <div class="ad-label">▶ REWARDED AD</div>
+      <div class="ad-content">Watch an ad to receive rare Golden Lure bait!</div>
+      <button class="btn ad-btn" id="watch-ad-btn">▶ Watch Ad (30s)</button>
+    </div>
+    <button class="btn primary-btn" id="continue-btn">Continue</button>
+  </div>
+</div>
+<script src="game.js"></script>
+</body>
+</html>

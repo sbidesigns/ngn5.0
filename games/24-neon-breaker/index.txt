@@ -1,0 +1,44 @@
+════════════════════════════════════════════════════
+NGN4 GAME #24: NEON BREAKER
+════════════════════════════════════════════════════
+
+TITLE:    Neon Breaker
+GENRE:    Brick Breaker / Breakout
+LORE:     "The Neon Barrier seals an ancient threat. Shatter it layer by layer before it's too late."
+
+FEATURES:
+  - 30 levels with procedural brick layouts
+  - 8 brick types: Normal, Tough (2HP), Metal (3HP), Explosive (chain), Indestructible, Power-up, Multi-ball, Laser
+  - 10 power-ups: Wide paddle, Multi-ball, Laser, Fireball, Slow, Sticky, Extra Life, Coin Rain, Shield, Magnet
+  - Boss bricks every 10 levels (indestructible walls with weak spots)
+  - Combo scoring system
+  - Particle effects on brick destruction
+  - Level editor with click/right-click brick placement
+  - Mouse and touch controls
+
+CONTROLS:
+  - Mouse/Touch to move paddle
+  - Click to launch ball
+  - Right-click in editor to cycle brick types
+
+REWARDS:
+  - +1 coin per brick broken
+  - +5 coins per power-up collected
+  - +50 coins per level clear
+  - Bonus coins for remaining lives
+  - Continue costs 5 gems
+  - All rewards saved to ngn4_rewards
+
+SCREENS:
+  - Main menu → How to play → Game (canvas + HUD)
+  - Level complete results → Game over (with continue/retry)
+  - Level editor (custom level creation)
+  - Rewarded ad between boss level sets
+
+TECH:
+  - Canvas 2D rendering with glow effects
+  - Web Audio oscillators for sound
+  - Particle system
+  - localStorage for rewards
+  - Touch support
+  - requestAnimationFrame game loop

@@ -1,0 +1,7 @@
+NGN4 Game #35: Ring Champion
+Genre: Sports / Boxing
+Story: From underground clubs to the World Championship — fight your way through 12 opponents to become the undisputed champion.
+Features: 12 unique opponents with different styles (aggressive, defensive, counter, balanced), stamina system, health bars, 3-round fights (90s), combo system, knockdown, training mini-games, stat upgrades, championship progression
+Controls: Arrow keys = Move/Dodge, Z = Jab, X = Hook, C = Uppercut, SPACE = Block
+Rewards: +30/round won, +100/fight won, +500 championship bonus, training costs 20 coins
+Ad: Rewarded ad between fights for full stamina recovery

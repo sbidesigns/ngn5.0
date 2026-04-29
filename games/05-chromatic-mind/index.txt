@@ -1,0 +1,72 @@
+# NGN4 Game: Chromatic Mind
+## 3D Match-3 Puzzle
+
+### Overview
+The Chromatic Nexus is collapsing. Match the resonance frequencies to stabilize reality before dimensions merge.
+
+### Gameplay
+- 3D match-3 puzzle on an 8x8 grid using Babylon.js
+- Click two adjacent cubes to swap them
+- Match 3+ same-colored cubes to score points
+- 10 levels with increasing difficulty and score targets
+
+### Controls
+- Click: Select cube
+- Click adjacent cube: Swap
+- Mobile: Tap to select, tap adjacent to swap
+
+### Cube Colors (6 types)
+1. Red
+2. Blue
+3. Green
+4. Yellow
+5. Purple
+6. Cyan
+
+### Special Blocks
+- Match 4 in a row → Lightning (clears entire row)
+- Match 5+ in a row → Rainbow/Wildcard
+- Bomb blocks: Clear 3x3 area when matched
+
+### Features
+- Combo multiplier system (up to 10x)
+- Cascade system: cubes fall and chain reactions occur
+- Move limits per level
+- Star rating (1-3) based on score achieved
+- Level select screen
+- Auto-shuffle when no moves available
+- Hint system (watch ad for hint on next level)
+
+### Level Progression
+1. First Resonance - 500 pts, 30 moves, 4 colors
+2. Color Shift - 800 pts, 28 moves, 5 colors
+3. Deep Resonance - 1200 pts, 26 moves, 5 colors
+4. Prismatic - 1500 pts, 25 moves, 6 colors
+5. Chaos Theory - 2000 pts, 25 moves, 6 colors
+6. Dimension Rift - 2500 pts, 24 moves, 6 colors
+7. Quantum Match - 3000 pts, 23 moves, 6 colors
+8. Singularity - 3500 pts, 22 moves, 6 colors
+9. Void Collapse - 4000 pts, 22 moves, 6 colors
+10. Nexus Core - 5000 pts, 20 moves, 6 colors
+
+### Rewards
+- Points convert to coins (1pt = 0.1 coins)
+- Star bonuses: 1★=+0, 2★=+50, 3★=+100 coins
+- Level clear bonus
+
+### Star Ratings
+- 1 Star: Reach target score
+- 2 Stars: Reach 1.5x target
+- 3 Stars: Reach 2x target
+
+### Ad Integration
+- Interstitial ads between levels
+- Rewarded ad for +5 extra moves on failure
+- Rewarded ad for hint on level complete
+
+### Technical
+- Babylon.js CDN for 3D rendering
+- GlowLayer for neon effects
+- Smooth animation system for swaps and cascades
+- Particle effects on matches
+- localStorage for star progress

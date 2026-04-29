@@ -1,0 +1,7 @@
+NGN4 Game #31: NGN Chess
+Genre: Strategy / Board
+Story: The Royal Grid — where minds clash and strategy reigns supreme. Challenge the AI to earn your place in the Grandmaster Hall.
+Features: Full chess rules (castling, en passant, promotion, check/checkmate/stalemate), 3 AI difficulty levels, move history, captured pieces, undo, board themes, timer modes, legal move highlighting
+Controls: Click to select piece, click to move. Buttons for undo, resign, menu.
+Rewards: +20 win, +5 draw, +2/capture, difficulty bonus
+Ad: Rewarded ad between matches for unlimited undo

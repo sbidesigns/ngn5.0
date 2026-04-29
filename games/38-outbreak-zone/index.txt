@@ -1,0 +1,33 @@
+OUTBREAK ZONE - NGN4 Game #38
+Zombie Survival Shooter
+
+STORY:
+Day 1: The outbreak began. Day 47: You're still alive. Hold the line at the evacuation point until rescue arrives.
+
+CONTROLS:
+WASD - Move
+Mouse - Aim
+Click - Shoot
+R - Reload
+B - Build barricade
+1-8 - Switch weapons
+
+FEATURES:
+- 20 waves of zombie hordes
+- 6 zombie types: Walker, Runner, Tank, Spitter, Exploder, Boss
+- 8 weapons: Pistol, Shotgun, SMG, Rifle, Sniper, Flamethrower, Rocket Launcher, Minigun
+- Barricade building (wood, metal)
+- Resource scavenging between waves
+- Weapon shop
+- Survivor recruitment (AI allies)
+- Day/night cycle (harder at night)
+- Supply drops
+
+REWARDS:
++5 per zombie kill
++50 per wave survived
++20 per supply found
+Weapons/barricades cost coins
+
+AD INTEGRATION:
+Rewarded ad between every 5 waves for supply crate

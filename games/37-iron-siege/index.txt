@@ -1,0 +1,30 @@
+IRON SIEGE - NGN4 Game #37
+Tank Battle Game
+
+STORY:
+The Iron War has raged for decades. Command your tank battalion through 20 battlefields to end the conflict once and for all.
+
+CONTROLS:
+WASD - Move tank
+Mouse - Aim turret
+Click - Fire cannon
+
+FEATURES:
+- 6 tank types: Light, Medium, Heavy, Artillery, Scout, Super
+- Destructible terrain (buildings)
+- 20 missions across battlefields
+- Enemy tanks with AI
+- Base capture mechanic
+- Ammo/reload system
+- Terrain types: Open, Forest, Water, Buildings
+- Friendly AI units
+- Medal system per mission
+
+REWARDS:
++15 coins per enemy tank
++100 coins per mission complete
+Bonus for no losses
+Tank upgrades cost coins
+
+AD INTEGRATION:
+Rewarded ad between missions for instant reload/repair

@@ -1,0 +1,6 @@
+title: Jungle Rush
+genre: 2D Platformer
+cat: action
+color: #0f0
+icon: 🌴
+desc: Race through ancient temple zones. Run, jump, spin, and slide your way to the Heart of the Jungle.

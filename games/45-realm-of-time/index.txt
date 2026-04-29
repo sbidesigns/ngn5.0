@@ -1,0 +1,6 @@
+title: Realm of Time
+genre: Action-RPG
+cat: rpg
+color: #44f
+icon: ⏳
+desc: Shift between past and present to save Aethoria. 7 dungeons, 7 bosses, time manipulation.

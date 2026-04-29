@@ -1,0 +1,56 @@
+# NGN4 Game: Star Vanguard
+## 3D Space Shooter
+
+### Overview
+Commander, the Void Fleet approaches. You are humanity's last defense at the Vanguard Line.
+
+### Gameplay
+- Forward-scrolling 3D space shooter using Babylon.js
+- WASD to move, SPACE/Click to shoot, Q for special weapon
+- Waves of enemies with boss battles every 5 waves
+- 10 waves per sector, 5 sectors total
+
+### Controls
+- WASD: Move ship
+- SPACE or Click: Shoot
+- P: Pause
+- Mobile: Drag to move, auto-fire enabled
+
+### Enemy Types
+1. Scout (Red) - Fast, low HP, 10 coins, 50 points
+2. Cruiser (Orange) - Medium speed/HP, 25 coins, 150 points
+3. Destroyer (Purple) - Slow, high HP, 50 coins, 300 points
+4. Boss (every 5th wave) - 200 coins, 1000 points
+
+### Power-ups
+- Shield: Restore shield energy
+- Rapid Fire: Increased fire rate for limited time
+- Spread Shot: Triple projectile spread
+- Health: Restore hull integrity
+- Missile: Powerful projectile
+
+### Ship Upgrades (Hangar)
+- Damage: Increases projectile damage
+- Fire Rate: Faster shooting
+- Shield: More shield capacity
+- Hull HP: More health points
+- Speed: Faster movement
+
+### Rewards
+- 10 coins per scout kill
+- 25 coins per cruiser kill
+- 50 coins per destroyer kill
+- 200 coins per boss kill
+- +300 sector clear bonus (+100 per sector tier)
+- Upgrades cost coins
+
+### Ad Integration
+- Interstitial ads between sectors
+- Rewarded ad for revive on game over (restore full health/shield)
+
+### Technical
+- Babylon.js CDN for 3D rendering
+- GlowLayer for neon effects
+- Procedural enemy spawning
+- Star field scrolling background
+- localStorage for upgrades

@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #0a0a0f;
+  color: #e0e0e0;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: var(--ngn-vh);
+  overflow: hidden;
+}
+
+#game-container {
+  position: relative;
+  width: 800px;
+  height: 600px;
+  background: #0d0d1a;
+  border: 2px solid #1a2a1a;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0, 255, 100, 0.1);
+}
+
+.screen {
+  display: none;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px;
+  z-index: 10;
+  overflow-y: auto;
+}
+
+.screen.active { display: flex; }
+
+.title {
+  font-size: 38px;
+  color: #4f4;
+  text-shadow: 0 0 20px rgba(0, 255, 100, 0.5);
+  margin-bottom: 10px;
+  letter-spacing: 4px;
+}
+
+.title.success { color: #ff0; text-shadow: 0 0 20px rgba(255, 255, 0, 0.5); }
+
+.subtitle { font-size: 18px; color: #888; margin-bottom: 20px; letter-spacing: 6px; }
+
+.story-text {
+  max-width: 500px;
+  color: #aaa;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.btn {
+  background: transparent;
+  border: 2px solid #4f4;
+  color: #4f4;
+  padding: 10px 24px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 14px;
+  cursor: pointer;
+  margin: 4px;
+  transition: all 0.3s;
+  letter-spacing: 2px;
+}
+
+.btn:hover { background: #4f4; color: #0a0a0f; box-shadow: 0 0 15px rgba(0,255,100,0.5); }
+
+.coins-display { margin-top: 20px; font-size: 20px; color: #ff0; }
+
+.hud {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.9);
+  border-bottom: 1px solid #1a2a1a;
+  font-size: 13px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 5;
+  color: #4f4;
+}
+
+canvas { position: absolute; top: 36px; left: 0; cursor: pointer; }
+
+.toolbar {
+  position: absolute;
+  top: 36px;
+  right: 0;
+  width: 160px;
+  height: 440px;
+  background: rgba(0, 0, 0, 0.9);
+  border-left: 1px solid #1a2a1a;
+  padding: 4px;
+  overflow-y: auto;
+  z-index: 5;
+}
+
+.tool-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 8px;
+  background: #111;
+  border: 1px solid #222;
+  color: #aaa;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  cursor: pointer;
+  margin-bottom: 3px;
+  transition: all 0.2s;
+}
+
+.tool-btn:hover { border-color: #4f4; color: #4f4; }
+.tool-btn.selected { border-color: #4f4; background: rgba(0,255,100,0.1); color: #4f4; }
+.tool-btn .emoji { font-size: 18px; }
+.tool-btn .key { color: #555; font-size: 10px; margin-left: auto; }
+
+.info-bar {
+  position: absolute;
+  bottom: 26px;
+  left: 0;
+  width: 640px;
+  padding: 6px 10px;
+  background: rgba(0,0,0,0.85);
+  font-size: 12px;
+  color: #888;
+  z-index: 5;
+  min-height: 24px;
+}
+
+.controls-hint {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 4px;
+  font-size: 10px;
+  color: #444;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.8);
+}
+
+.market-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 150px);
+  gap: 6px;
+}
+
+.market-item {
+  background: #111;
+  border: 2px solid #222;
+  padding: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 12px;
+}
+
+.market-item:hover { border-color: #4f4; }
+.market-item .emoji { font-size: 24px; }
+.market-item .name { color: #4f4; margin: 4px 0; }
+.market-item .price { color: #ff0; }
+.market-item .desc { color: #666; font-size: 10px; }
+
+.reward-text { font-size: 24px; color: #ff0; margin: 15px 0; }
+
+.ad-mockup {
+  background: #111; border: 2px solid #333; padding: 20px;
+  width: 400px; text-align: center;
+}
+.ad-label { background: #f00; color: #fff; padding: 4px; font-size: 11px; margin-bottom: 15px; letter-spacing: 2px; }
+.ad-timer { margin-top: 15px; font-size: 14px; color: #888; }
+.ad-timer span { color: #f44; font-size: 20px; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: #333; }

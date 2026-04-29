@@ -1,0 +1,34 @@
+NGN4 Game #17: Goal Rush
+========================
+Genre: Top-Down Arcade Soccer
+Story: The Neon Cup is the ultimate prize. Lead your underdog team from the streets to the world stage.
+
+Features:
+- 5v5 top-down arcade soccer gameplay
+- Player controls one character, switchable with E key
+- AI teammates and opponents with intelligent positioning
+- Power shot meter (hold Space)
+- Pass system (Q key)
+- Sprint/slide mechanic (Shift)
+- 2-minute halves (2 halves per match)
+- 8 tournament rounds with increasing difficulty
+- Player stats: Speed, Shot, Pass, Defense
+- Stat upgrades and shop items purchasable with coins
+- Team uniform and stadium customization
+
+Controls:
+- WASD: Move player
+- Space (hold): Charge power shot, release to kick
+- Q: Pass to nearest teammate
+- E: Switch controlled player
+- Shift: Sprint boost
+
+Rewards:
+- +5 coins per goal scored
+- +50 coins per match win
+- +10 coins per assist
+- +200 coins for tournament championship
+
+Ad Integration:
+- Interstitial ad between tournament matches
+- Rewarded ad for temporary stat boost option

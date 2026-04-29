@@ -1,0 +1,31 @@
+SKY VIPERS - NGN4 Game #36
+Air Combat Top-Down Shooter
+
+STORY:
+The Sky Vipers are the elite fighter squadron. Lead your wing against the rogue states threatening global peace.
+
+CONTROLS:
+WASD - Move aircraft
+Mouse - Aim
+Click/Space - Shoot
+Scroll/1-3 - Switch weapons
+
+FEATURES:
+- 3 weapon types: Machine Gun, Missiles, Laser
+- 8 enemy types: Fighters, Bombers, Helicopters, Drones, AA Turrets, Boss Ships
+- 10 campaign missions with objectives
+- Health/Armor system
+- Weapon pickups
+- Wingman AI ally
+- Radar minimap
+- Cloud cover visual effects
+- Explosion effects
+
+REWARDS:
++10 coins per kill
++50 coins per mission complete
++200 coins per boss kill
+Weapon upgrades cost coins
+
+AD INTEGRATION:
+Rewarded ad between missions for full ammo/health refill

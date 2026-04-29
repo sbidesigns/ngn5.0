@@ -1,0 +1,7 @@
+NGN4 Game #33: Deep Cast
+Genre: Simulation / Fishing
+Story: The Deep Waters hold secrets and treasures. Cast your line into the abyss and discover what lurks below.
+Features: 20 fish species (common to legendary), 5 locations, weather system, bait shop, fish journal, equipment upgrades, sell fish, golden variants
+Controls: Click Cast Line, wait for bite, click Reel In, then SPACE/Arrow keys to reel mini-game
+Rewards: Fish sell for coins (common 5-20, rare 50-200, legendary 500+), collection milestones
+Ad: Rewarded ad for rare Golden Lure bait

@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#e0e0e0;font-family:'Share Tech Mono',monospace;overflow:hidden;display:flex;justify-content:center;align-items:center;height: var(--ngn-vh)}
+#game-container{position:relative;width:900px;height:700px}
+canvas{display:block;background:#0a0a0f;border:1px solid #1a1a2e;border-radius:4px;cursor:pointer}
+.screen{position:absolute;top:0;left:0;width:100%;height:100%;display:none;flex-direction:column;justify-content:center;align-items:center;background:rgba(10,10,15,0.97);z-index:10;text-align:center;padding:20px}
+.screen.active{display:flex}
+.neon-title{font-size:48px;color:#a6f;text-shadow:0 0 20px #a6f,0 0 40px #a6f,0 0 80px #a6f;margin-bottom:5px;letter-spacing:6px}
+.subtitle{color:#0ff;margin:5px 0 15px;font-size:14px;letter-spacing:3px}
+.story-text{max-width:600px;line-height:1.6;color:#aaa;margin:10px 0 20px;font-size:13px}
+.obj-text{color:#0ff;font-size:14px;margin:10px 0 20px}
+.neon-btn{background:transparent;border:1px solid #a6f;color:#a6f;padding:12px 30px;font-family:'Share Tech Mono',monospace;font-size:15px;cursor:pointer;margin:6px;transition:all .2s;letter-spacing:2px}
+.neon-btn:hover{background:#a6f;color:#000;box-shadow:0 0 20px #a6f}
+.menu-buttons{margin:15px 0}
+.coins-display{color:#ff0;font-size:16px;margin-top:15px;letter-spacing:2px}
+.stars-display{color:#ff0;font-size:14px;margin-top:5px}
+.key{color:#a6f;border:1px solid #a6f;padding:2px 8px;border-radius:3px;font-size:12px}
+.how-content{text-align:left;max-width:500px;line-height:2;margin:15px 0}
+.how-content p{font-size:13px;color:#ccc}
+.ad-mockup{width:400px;height:200px;border:2px solid #f0f;display:flex;flex-direction:column;justify-content:center;align-items:center;margin:20px 0;background:#111}
+.ad-fake{font-size:28px;color:#f0f;text-shadow:0 0 10px #f0f}
+.ad-fake-sub{color:#aaa;font-size:12px;margin-top:8px}
+.ad-timer{font-size:48px;color:#0f0;margin-top:15px}
+.ad-skip-text{color:#666;font-size:12px;margin-top:10px}
+.result-stats{margin:15px 0;font-size:14px;line-height:2}
+.result-stats p{color:#ccc}
+.result-stats span{color:#a6f}
+.lore-text{color:#f0f;font-style:italic;font-size:13px;max-width:500px;margin:10px 0;line-height:1.5}
+.hud{position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:5}
+.hud.hidden{display:none}
+.hud-top{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,0.75);font-size:11px;flex-wrap:wrap;gap:4px;align-items:center}
+.hud-bottom{position:absolute;bottom:0;left:0;width:100%;padding:8px 12px;background:rgba(0,0,0,0.75);font-size:12px;display:flex;justify-content:space-between;align-items:center}
+.hud-level{color:#a6f}.hud-hints{color:#ff0}.hud-timer{color:#fff}.hud-moves{color:#0ff}.hud-coins{color:#ff0}
+.hint-btn{pointer-events:all;background:transparent;border:1px solid #ff0;color:#ff0;padding:4px 12px;font-family:'Share Tech Mono',monospace;font-size:11px;cursor:pointer}
+.hint-btn:hover{background:#ff0;color:#000}
+.level-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:500px;margin:15px 0}
+.level-btn{background:rgba(30,30,50,0.8);border:1px solid #333;color:#aaa;padding:15px;font-family:'Share Tech Mono',monospace;font-size:12px;cursor:pointer;text-align:center;transition:all .2s}
+.level-btn:hover{border-color:#a6f;color:#a6f}
+.level-btn.completed{border-color:#0f0;color:#0f0}
+.level-btn.locked{opacity:0.3;cursor:not-allowed}
+.level-stars{font-size:10px;color:#ff0;margin-top:5px}

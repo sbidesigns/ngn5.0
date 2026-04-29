@@ -1,0 +1,6 @@
+title: Biohazard Outbreak
+genre: Survival Horror
+cat: horror
+color: #f00
+icon: ☣️
+desc: Survive a bioweapon facility. Manage resources, solve puzzles, uncover the truth. 3 endings.

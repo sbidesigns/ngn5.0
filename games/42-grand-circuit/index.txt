@@ -1,0 +1,6 @@
+title: Grand Circuit
+genre: Kart Racing
+cat: racing
+color: #0ff
+icon: 🏎️
+desc: 8 tracks, 7 power-ups, full championship season. Drift, boost, and race to victory.

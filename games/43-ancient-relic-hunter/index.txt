@@ -1,0 +1,6 @@
+title: Ancient Relic Hunter
+genre: Action-Adventure
+cat: action
+color: #f80
+icon: 🔱
+desc: Explore 6 ancient temples. Solve puzzles, fight enemies, collect legendary relics.

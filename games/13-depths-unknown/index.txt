@@ -1,0 +1,49 @@
+NGN4 Game Engine - Game #13
+Title: Depths Unknown
+Genre: Dungeon Crawler Roguelike
+Version: 1.0
+
+STORY:
+Every generation, the Crawler descends into the Depths to retrieve the Heart of the Mountain. This time, it is you. Ten floors of procedurally generated dungeons stand between you and glory. Permadeath awaits the careless.
+
+GAMEPLAY:
+- Turn-based movement on a grid (WASD or Arrow Keys)
+- Each move counts as one turn - enemies also move
+- Explore rooms, fight enemies, collect loot
+- Descend 10 floors to reach the Heart of the Mountain
+- Boss fight on Floor 10 against the Heart Guardian
+
+FEATURES:
+- Procedural dungeon generation with rooms and corridors
+- Fog of war - only see within vision radius
+- 4 playable classes: Warrior, Rogue, Mage, Cleric
+- 8 enemy types with scaling difficulty
+- 12 item types: weapons, armor, potions, scrolls, rings
+- Hunger system - find food or starve
+- Permanent death (roguelike)
+- Character leveling with stat increases
+- Shop every 3rd floor
+- Chest loot system
+- Carried coins between runs (30% on win, 10% on death)
+
+CLASSES:
+- Warrior: HP 40, ATK 6, DEF 5 (Free)
+- Rogue: HP 28, ATK 7, DEF 2 - 20% crit chance (200 coins)
+- Mage: HP 25, ATK 9, DEF 1 (300 coins)
+- Cleric: HP 35, ATK 4, DEF 4 - Passive healing (400 coins)
+
+CONTROLS:
+WASD/Arrows - Move (bump to attack)
+E/Space - Wait a turn
+Click inventory items - Use/Equip
+
+REWARDS:
+Coins from enemies and chests
++500 bonus for completing all 10 floors
+30% of coins carried to next run on victory
+10% of coins carried on death
+Unlock classes with coins
+
+AD INTEGRATION:
+- Ad between floors 5-6
+- Death screen ad for saving items

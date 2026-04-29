@@ -1,0 +1,7 @@
+NGN4 Game #32: Cosmic Flip
+Genre: Arcade / Pinball
+Story: The Cosmic Flipper is a legendary arcade machine that warps reality. Rack up the highest score across the multiverse.
+Features: Real-time physics, 2 flippers, ball launcher, 10 bumpers, 5 ramp targets, 3 kickback lanes, multiball, ball save, combo system, jackpot, 3 tables (Neon, Galaxy, Void), high scores
+Controls: Z/A = Left Flip, M/L = Right Flip, Hold SPACE = Launch with power meter
+Rewards: 1000pts = 1 coin, table bonus, multiball bonus
+Ad: Rewarded ad between games for extended ball save

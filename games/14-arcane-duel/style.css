@@ -1,0 +1,91 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a0f; color: #e0e0e0; font-family: 'Courier New', monospace; overflow: hidden; display: flex; justify-content: center; align-items: center; height: var(--ngn-vh); }
+#game-container { position: relative; width: 800px; height: 600px; background: #0d0d1a; border: 1px solid #1a1a3a; display: flex; flex-direction: column; }
+.screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; align-items: center; justify-content: center; background: rgba(10,10,20,0.97); z-index: 10; padding: 20px; }
+.screen.active { display: flex; }
+.neon-title { font-size: 32px; color: #ff44aa; text-shadow: 0 0 10px #ff44aa, 0 0 30px #ff44aa, 0 0 60px #882255; margin-bottom: 15px; letter-spacing: 4px; }
+.story-text { color: #8888aa; max-width: 600px; text-align: center; margin-bottom: 15px; font-size: 13px; line-height: 1.5; }
+.btn { background: transparent; border: 2px solid #ff44aa; color: #ff44aa; font-family: 'Courier New', monospace; font-size: 14px; padding: 8px 24px; cursor: pointer; margin: 5px; transition: all 0.3s; text-transform: uppercase; letter-spacing: 2px; }
+.btn:hover { background: #ff44aa; color: #0a0a0f; box-shadow: 0 0 15px #ff44aa; }
+.btn-sm { background: transparent; border: 1px solid #ff44aa; color: #ff44aa; font-family: 'Courier New', monospace; font-size: 11px; padding: 4px 12px; cursor: pointer; transition: all 0.3s; }
+.btn-sm:hover { background: #ff44aa; color: #0a0a0f; }
+
+#enemy-area { height: 140px; padding: 5px 10px; background: #0a0a14; border-bottom: 1px solid #1a1a3a; }
+#enemy-info { display: flex; align-items: center; gap: 10px; padding: 3px 0; font-size: 12px; }
+#enemy-name { color: #ff44aa; font-weight: bold; min-width: 120px; }
+#enemy-hp-bar, #player-hp-bar { width: 200px; height: 14px; background: #1a1a2e; border: 1px solid #444; position: relative; }
+#enemy-hp-fill { width: 100%; height: 100%; background: linear-gradient(90deg, #ff3366, #ff6688); transition: width 0.3s; }
+#player-hp-fill { width: 100%; height: 100%; background: linear-gradient(90deg, #33ff66, #66ff88); transition: width 0.3s; }
+#enemy-hp-text { font-size: 10px; color: #aaa; }
+#enemy-mana, #player-mana { font-size: 11px; color: #6688ff; }
+#enemy-hand { display: flex; gap: 3px; padding: 3px 0; justify-content: center; }
+#enemy-field { display: flex; gap: 5px; padding: 3px 0; justify-content: center; min-height: 70px; align-items: center; }
+
+#battlefield { flex: 1; display: flex; align-items: center; padding: 10px; position: relative; }
+#player-field { display: flex; gap: 5px; justify-content: center; align-items: center; width: 100%; min-height: 90px; flex-wrap: wrap; }
+#turn-info { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); text-align: center; }
+#turn-num { display: block; color: #888; font-size: 11px; }
+#phase-text { display: block; color: #ff44aa; font-size: 12px; font-weight: bold; margin: 5px 0; }
+
+#player-area { height: 170px; padding: 5px 10px; background: #0a0a14; border-top: 1px solid #1a1a3a; }
+#player-hand { display: flex; gap: 3px; padding: 3px 0; justify-content: center; min-height: 100px; align-items: flex-end; flex-wrap: wrap; }
+#player-info { display: flex; align-items: center; gap: 10px; padding: 3px 0; font-size: 12px; }
+#player-coins { color: #ffcc00; }
+#menu-coins { margin-top: 10px; color: #ffcc00; font-size: 16px; }
+#menu-buttons { margin: 15px 0; display: flex; gap: 10px; }
+
+/* Cards */
+.card { width: 80px; min-height: 100px; background: #1a1a2e; border: 2px solid #333; border-radius: 6px; padding: 4px; font-size: 10px; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; }
+.card:hover { border-color: #ff44aa; transform: translateY(-5px); }
+.card.playable { border-color: #ff44aa88; cursor: pointer; }
+.card.playable:hover { border-color: #ff44aa; box-shadow: 0 0 10px #ff44aa44; }
+.card.not-playable { opacity: 0.5; cursor: not-allowed; }
+.card.fire { border-color: #ff4422; }
+.card.fire:hover { box-shadow: 0 0 10px #ff442244; }
+.card.ice { border-color: #4488ff; }
+.card.ice:hover { box-shadow: 0 0 10px #4488ff44; }
+.card.nature { border-color: #44cc44; }
+.card.nature:hover { box-shadow: 0 0 10px #44cc4444; }
+.card.shadow { border-color: #aa44ff; }
+.card.shadow:hover { box-shadow: 0 0 10px #aa44ff44; }
+.card-back { width: 50px; height: 70px; background: #1a1a2e; border: 1px solid #444; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #333; }
+.card .card-name { color: #e0e0e0; font-weight: bold; font-size: 9px; text-align: center; margin-bottom: 2px; }
+.card .card-cost { color: #6688ff; font-weight: bold; font-size: 12px; }
+.card .card-desc { color: #888; font-size: 8px; text-align: center; margin-top: auto; }
+.card .card-stats { font-size: 10px; margin-top: 3px; }
+.card .card-atk { color: #ff6644; }
+.card .card-hp { color: #66ff66; }
+.card.mini { width: 60px; min-height: 70px; font-size: 8px; }
+.card.mini .card-name { font-size: 8px; }
+.card.mini .card-cost { font-size: 10px; }
+.card.mini .card-desc { display: none; }
+
+.card-common { background: #1a1a2e; }
+.card-rare { background: #1a1a3e; }
+.card-epic { background: #2a1a3e; }
+.card-legendary { background: #2a2a1a; border-color: #ffcc00; }
+
+/* Deck Builder */
+#collection { display: flex; flex-wrap: wrap; gap: 5px; max-height: 300px; overflow-y: auto; width: 750px; padding: 10px; background: #0a0a14; border: 1px solid #1a1a3a; margin-bottom: 10px; }
+#current-deck { width: 750px; background: #0a0a14; border: 1px solid #1a1a3a; padding: 10px; margin-bottom: 10px; }
+#current-deck h3 { color: #ff44aa; font-size: 14px; margin-bottom: 5px; }
+#deck-cards { display: flex; flex-wrap: wrap; gap: 3px; }
+
+/* Opponent select */
+#opponent-list { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-height: 350px; overflow-y: auto; margin: 10px 0; }
+.opp-card { background: #1a1a2e; border: 2px solid #333; padding: 12px; width: 150px; text-align: center; cursor: pointer; transition: all 0.2s; }
+.opp-card:hover { border-color: #ff44aa; }
+.opp-card.beaten { border-color: #66ff66; opacity: 0.7; }
+.opp-card h4 { color: #e0e0e0; margin-bottom: 4px; }
+.opp-card p { color: #888; font-size: 10px; }
+.opp-card .opp-school { color: #ff44aa; font-size: 11px; }
+
+#result-stats { margin: 15px 0; font-size: 14px; line-height: 2; color: #888; }
+#earned-coins { color: #ffcc00; font-size: 18px; margin: 10px 0; }
+
+#ad-mockup { background: linear-gradient(135deg, #2e0a1a, #1a0a2e); border: 2px solid #ff44aa; padding: 40px; text-align: center; width: 400px; }
+.ad-label { color: #666; font-size: 10px; margin-bottom: 20px; }
+.ad-title { color: #ffcc00; font-size: 22px; margin-bottom: 10px; }
+.ad-body { color: #aaa; font-size: 14px; margin-bottom: 20px; }
+.ad-cta { background: #ffcc00; color: #000; padding: 10px 30px; display: inline-block; font-weight: bold; }
+#ad-timer { color: #666; font-size: 12px; margin-top: 15px; }

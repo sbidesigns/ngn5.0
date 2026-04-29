@@ -1,0 +1,43 @@
+════════════════════════════════════════════════════
+NGN4 GAME #23: SERPENT GRID
+════════════════════════════════════════════════════
+
+TITLE:    Serpent Grid
+GENRE:    Modern Snake
+LORE:     "In the digital realm, the Serpent is the ultimate predator. Consume data nodes. Grow. Dominate the Grid."
+
+FEATURES:
+  - 5 Game Modes: Classic, Time Attack (60s), Survival (obstacles), Speed (accelerating), Maze (wall navigation)
+  - 20 unlockable snake skins with visual effects (including Rainbow cycling)
+  - 5 Power-up types: Speed Boost, Slow Mo, Magnet, Shield, Score x2
+  - Combo system — eat food quickly for multiplier (up to x10)
+  - 15 levels with increasing difficulty
+  - Obstacle walls spawn in Survival mode
+  - Swipe controls for mobile
+  - High score tracking per mode
+  - Wrapped grid (screen edges connect)
+
+CONTROLS:
+  - WASD or Arrow keys to steer
+  - Swipe on mobile
+  - Eat food to grow, collect power-ups for abilities
+
+REWARDS:
+  - +1 coin per food eaten
+  - +5 coins per power-up collected
+  - +20 coins for new high score
+  - Skins purchasable with coins (10-50 range)
+  - Gems and coins saved to ngn4_rewards
+
+SCREENS:
+  - Main menu → Mode select → Game (canvas + HUD)
+  - Game over with stats → Continue (ad) / Retry / Menu
+  - Skin shop (unlock with coins)
+  - Rewarded ad for continue on death
+
+TECH:
+  - Canvas 2D rendering with glow effects
+  - Web Audio oscillators
+  - localStorage for saves/skins/high scores/rewards
+  - Touch swipe support
+  - setInterval game loop

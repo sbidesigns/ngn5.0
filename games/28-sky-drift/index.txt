@@ -1,0 +1,42 @@
+NGN4 GAME 28: SKY DRIFT
+════════════════════════════════════════════════
+Flappy-Style Game
+
+STORY: You are a sky courier navigating the treacherous Neon Canyons. One tap to ascend, survive the gauntlet.
+
+GAMEPLAY:
+- Tap/click/spacebar to flap and ascend
+- Avoid pipes and ground/ceiling
+- Survive as long as possible for the highest score
+- Collect coins between pipes for bonus rewards
+- Grab power-ups for special abilities
+
+FEATURES:
+- Procedurally generated pipes with varying gap sizes
+- 8 bird skins with unique visual effects
+- 5 environments (Neon Canyon, Crystal Cave, Storm Clouds, Solar Flare, The Void)
+- Medal system (Bronze/Silver/Gold/Platinum)
+- Coin pickups between pipes
+- Power-ups (Slow Motion, Shield)
+- Daily challenge mode
+- Increasing difficulty with score
+- Particle effects and trail systems
+- Progressive environment unlocks
+
+SKINS:
+- Classic (free), Phoenix (50), Ice Bird (100), Shadow (150)
+- Neon (200), Golden (300), Cyber (500), Cosmic (750)
+
+REWARDS:
+- +1 coin per pipe passed
+- +5 coins per coin collected
+- +20 coins for new best distance
+- Skins purchasable with coins
+
+AD INTEGRATION:
+- Death screen: Rewarded ad for continue from last position
+- Environment unlock ads between stages
+
+CONTROLS:
+- Click/Tap/Space/ArrowUp to flap
+- One input = one flap

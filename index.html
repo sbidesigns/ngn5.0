@@ -2,15 +2,913 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0;url=games/01-corridor-of-shadows/index.html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NGN5 — Universal Game Engine v5.0</title>
 <style>
-body { margin: 0; background: #000; color: #0f0; font-family: monospace; display: flex; align-items: center; justify-content: center; height: 100vh; }
-a { color: #0ff; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cyan: #00fff2;
+    --cyan-dim: #00fff266;
+    --cyan-glow: 0 0 10px #00fff2, 0 0 30px #00fff233;
+    --cyan-glow-strong: 0 0 8px #00fff2, 0 0 20px #00fff255, 0 0 40px #00fff222;
+    --bg: #0a0a0f;
+    --bg-card: #12121a;
+    --bg-card-hover: #1a1a28;
+    --border: #1e1e2e;
+    --border-hover: #00fff255;
+    --text: #d0d0d8;
+    --text-dim: #666680;
+    --text-bright: #ffffff;
+    --magenta: #ff00aa;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Courier New', 'Lucida Console', Monaco, monospace;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Subtle grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,242,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,242,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Scanline effect */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── HEADER ── */
+  header {
+    text-align: center;
+    padding: 40px 20px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-size: clamp(1.8rem, 5vw, 3.2rem);
+    font-weight: 900;
+    letter-spacing: 6px;
+    color: var(--cyan);
+    text-shadow: var(--cyan-glow);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .logo span {
+    color: var(--text-bright);
+    text-shadow: none;
+    font-weight: 300;
+  }
+
+  .subtitle {
+    font-size: clamp(0.65rem, 1.5vw, 0.85rem);
+    color: var(--text-dim);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .subtitle .sep {
+    color: var(--cyan-dim);
+    margin: 0 10px;
+  }
+
+  .game-count {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 4px 16px;
+    border: 1px solid var(--cyan-dim);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: var(--cyan);
+    letter-spacing: 2px;
+  }
+
+  /* ── SEARCH ── */
+  .search-bar {
+    margin: 24px auto 0;
+    max-width: 480px;
+    width: 100%;
+    position: relative;
+  }
+
+  .search-bar input {
+    width: 100%;
+    padding: 12px 16px 12px 42px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .search-bar input:focus {
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 3px var(--cyan-dim);
+  }
+
+  .search-bar input::placeholder { color: var(--text-dim); }
+
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim);
+    font-size: 1rem;
+    pointer-events: none;
+  }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    flex: 1;
+    padding: 30px 0;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-left: 2px;
+  }
+
+  .section-label::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--cyan-dim);
+    margin-top: 8px;
+  }
+
+  /* ── GAME GRID ── */
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    margin-bottom: 50px;
+  }
+
+  .game-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .game-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--cyan);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .game-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,255,242,0.06);
+  }
+
+  .game-card:hover::before { opacity: 1; }
+
+  .game-card:hover .game-name { color: var(--cyan); }
+
+  .game-num {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,255,242,0.06);
+    border: 1px solid rgba(0,255,242,0.15);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--cyan);
+    letter-spacing: 1px;
+  }
+
+  .game-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .game-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-bright);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.2s;
+  }
+
+  .game-folder {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 2px;
+  }
+
+  .game-arrow {
+    flex-shrink: 0;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .game-card:hover .game-arrow {
+    color: var(--cyan);
+    transform: translateX(3px);
+  }
+
+  .no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+
+  /* ── CONTROLS TABLE ── */
+  .controls-section {
+    margin-bottom: 50px;
+  }
+
+  .controls-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-card);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+
+  thead th {
+    background: rgba(0,255,242,0.06);
+    color: var(--cyan);
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  tbody td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  tbody tr:hover { background: rgba(0,255,242,0.02); }
+
+  .key {
+    display: inline-block;
+    padding: 2px 8px;
+    background: rgba(0,255,242,0.08);
+    border: 1px solid rgba(0,255,242,0.2);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: var(--cyan);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .action { color: var(--text); }
+  .desc { color: var(--text-dim); font-size: 0.75rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 24px 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+  }
+
+  footer .brand { color: var(--cyan); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    header { padding: 28px 12px 16px; }
+    .logo { letter-spacing: 3px; }
+    .subtitle { letter-spacing: 1px; }
+    .game-grid { grid-template-columns: 1fr; gap: 8px; }
+    .game-card { padding: 12px 14px; gap: 12px; }
+    .game-num { width: 38px; height: 38px; font-size: 0.75rem; }
+    table { font-size: 0.75rem; }
+    thead th, tbody td { padding: 8px 10px; }
+    .wrapper { padding: 0 12px; }
+  }
+
+  @media (min-width: 641px) and (max-width: 900px) {
+    .game-grid { grid-template-columns: repeat(2, 1fr); }
+  }
 </style>
 </head>
 <body>
-<p>Redirecting to <a href="games/01-corridor-of-shadows/index.html">Corridor of Shadows</a>...</p>
-<p style="color:#555;font-size:12px">NGN5 Engine v5.0 | Universal Input | Unified Pause | Gamepad + Touch</p>
+<div class="wrapper">
+
+  <!-- ═══ HEADER ═══ -->
+  <header>
+    <div class="logo">NGN5 <span>GAME ENGINE</span></div>
+    <div class="subtitle">
+      v5.0<span class="sep">|</span>Universal Engine<span class="sep">|</span>Unified Input<span class="sep">|</span>45 Games
+    </div>
+    <div class="game-count">// SELECT A GAME TO LAUNCH</div>
+    <div class="search-bar">
+      <span class="search-icon">&#9906;</span>
+      <input type="text" id="search" placeholder="Search games..." autocomplete="off">
+    </div>
+  </header>
+
+  <!-- ═══ MAIN ═══ -->
+  <main>
+
+    <!-- ── GAME GRID ── -->
+    <div class="section-label">Game Library</div>
+    <div class="game-grid" id="gameGrid">
+
+      <a href="games/01-corridor-of-shadows/index.html" class="game-card" data-name="01 corridor of shadows">
+        <div class="game-num">01</div>
+        <div class="game-info">
+          <div class="game-name">Corridor of Shadows</div>
+          <div class="game-folder">01-corridor-of-shadows</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/02-neon-circuit/index.html" class="game-card" data-name="02 neon circuit">
+        <div class="game-num">02</div>
+        <div class="game-info">
+          <div class="game-name">Neon Circuit</div>
+          <div class="game-folder">02-neon-circuit</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/03-crystal-heights/index.html" class="game-card" data-name="03 crystal heights">
+        <div class="game-num">03</div>
+        <div class="game-info">
+          <div class="game-name">Crystal Heights</div>
+          <div class="game-folder">03-crystal-heights</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/04-star-vanguard/index.html" class="game-card" data-name="04 star vanguard">
+        <div class="game-num">04</div>
+        <div class="game-info">
+          <div class="game-name">Star Vanguard</div>
+          <div class="game-folder">04-star-vanguard</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/05-chromatic-mind/index.html" class="game-card" data-name="05 chromatic mind">
+        <div class="game-num">05</div>
+        <div class="game-info">
+          <div class="game-name">Chromatic Mind</div>
+          <div class="game-folder">05-chromatic-mind</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/06-realm-of-echoes/index.html" class="game-card" data-name="06 realm of echoes">
+        <div class="game-num">06</div>
+        <div class="game-info">
+          <div class="game-name">Realm of Echoes</div>
+          <div class="game-folder">06-realm-of-echoes</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/07-bastion_protocol/index.html" class="game-card" data-name="07 bastion protocol">
+        <div class="game-num">07</div>
+        <div class="game-info">
+          <div class="game-name">Bastion Protocol</div>
+          <div class="game-folder">07-bastion_protocol</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/08-street-neon/index.html" class="game-card" data-name="08 street neon">
+        <div class="game-num">08</div>
+        <div class="game-info">
+          <div class="game-name">Street Neon</div>
+          <div class="game-folder">08-street-neon</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/09-command-grid/index.html" class="game-card" data-name="09 command grid">
+        <div class="game-num">09</div>
+        <div class="game-info">
+          <div class="game-name">Command Grid</div>
+          <div class="game-folder">09-command-grid</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/10-court-legends/index.html" class="game-card" data-name="10 court legends">
+        <div class="game-num">10</div>
+        <div class="game-info">
+          <div class="game-name">Court Legends</div>
+          <div class="game-folder">10-court-legends</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/11-beat-surge/index.html" class="game-card" data-name="11 beat surge">
+        <div class="game-num">11</div>
+        <div class="game-info">
+          <div class="game-name">Beat Surge</div>
+          <div class="game-folder">11-beat-surge</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/12-last-light/index.html" class="game-card" data-name="12 last light">
+        <div class="game-num">12</div>
+        <div class="game-info">
+          <div class="game-name">Last Light</div>
+          <div class="game-folder">12-last-light</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/13-depths-unknown/index.html" class="game-card" data-name="13 depths unknown">
+        <div class="game-num">13</div>
+        <div class="game-info">
+          <div class="game-name">Depths Unknown</div>
+          <div class="game-folder">13-depths-unknown</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/14-arcane-duel/index.html" class="game-card" data-name="14 arcane duel">
+        <div class="game-num">14</div>
+        <div class="game-info">
+          <div class="game-name">Arcane Duel</div>
+          <div class="game-folder">14-arcane-duel</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/15-shadow-veil/index.html" class="game-card" data-name="15 shadow veil">
+        <div class="game-num">15</div>
+        <div class="game-info">
+          <div class="game-name">Shadow Veil</div>
+          <div class="game-folder">15-shadow-veil</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/16-gravshift/index.html" class="game-card" data-name="16 gravshift">
+        <div class="game-num">16</div>
+        <div class="game-info">
+          <div class="game-name">Gravshift</div>
+          <div class="game-folder">16-gravshift</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/17-goal-rush/index.html" class="game-card" data-name="17 goal rush">
+        <div class="game-num">17</div>
+        <div class="game-info">
+          <div class="game-name">Goal Rush</div>
+          <div class="game-folder">17-goal-rush</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/18-dead-signal/index.html" class="game-card" data-name="18 dead signal">
+        <div class="game-num">18</div>
+        <div class="game-info">
+          <div class="game-name">Dead Signal</div>
+          <div class="game-folder">18-dead-signal</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/19-neon-metropolis/index.html" class="game-card" data-name="19 neon metropolis">
+        <div class="game-num">19</div>
+        <div class="game-info">
+          <div class="game-name">Neon Metropolis</div>
+          <div class="game-folder">19-neon-metropolis</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/20-sunrise-acres/index.html" class="game-card" data-name="20 sunrise acres">
+        <div class="game-num">20</div>
+        <div class="game-info">
+          <div class="game-name">Sunrise Acres</div>
+          <div class="game-folder">20-sunrise-acres</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/21-data-empire/index.html" class="game-card" data-name="21 data empire">
+        <div class="game-num">21</div>
+        <div class="game-info">
+          <div class="game-name">Data Empire</div>
+          <div class="game-folder">21-data-empire</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/22-labyrinth-protocol/index.html" class="game-card" data-name="22 labyrinth protocol">
+        <div class="game-num">22</div>
+        <div class="game-info">
+          <div class="game-name">Labyrinth Protocol</div>
+          <div class="game-folder">22-labyrinth-protocol</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/23-serpent-grid/index.html" class="game-card" data-name="23 serpent grid">
+        <div class="game-num">23</div>
+        <div class="game-info">
+          <div class="game-name">Serpent Grid</div>
+          <div class="game-folder">23-serpent-grid</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/24-neon-breaker/index.html" class="game-card" data-name="24 neon breaker">
+        <div class="game-num">24</div>
+        <div class="game-info">
+          <div class="game-name">Neon Breaker</div>
+          <div class="game-folder">24-neon-breaker</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/25-block-drop/index.html" class="game-card" data-name="25 block drop">
+        <div class="game-num">25</div>
+        <div class="game-info">
+          <div class="game-name">Block Drop</div>
+          <div class="game-folder">25-block-drop</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/26-mind-palace/index.html" class="game-card" data-name="26 mind palace">
+        <div class="game-num">26</div>
+        <div class="game-info">
+          <div class="game-name">Mind Palace</div>
+          <div class="game-folder">26-mind-palace</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/27-ngn-clicker/index.html" class="game-card" data-name="27 ngn clicker">
+        <div class="game-num">27</div>
+        <div class="game-info">
+          <div class="game-name">NGN Clicker</div>
+          <div class="game-folder">27-ngn-clicker</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/28-sky-drift/index.html" class="game-card" data-name="28 sky drift">
+        <div class="game-num">28</div>
+        <div class="game-info">
+          <div class="game-name">Sky Drift</div>
+          <div class="game-folder">28-sky-drift</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/29-neon-dash/index.html" class="game-card" data-name="29 neon dash">
+        <div class="game-num">29</div>
+        <div class="game-info">
+          <div class="game-name">Neon Dash</div>
+          <div class="game-folder">29-neon-dash</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/30-brain-vault/index.html" class="game-card" data-name="30 brain vault">
+        <div class="game-num">30</div>
+        <div class="game-info">
+          <div class="game-name">Brain Vault</div>
+          <div class="game-folder">30-brain-vault</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/31-ngn-chess/index.html" class="game-card" data-name="31 ngn chess">
+        <div class="game-num">31</div>
+        <div class="game-info">
+          <div class="game-name">NGN Chess</div>
+          <div class="game-folder">31-ngn-chess</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/32-cosmic-flip/index.html" class="game-card" data-name="32 cosmic flip">
+        <div class="game-num">32</div>
+        <div class="game-info">
+          <div class="game-name">Cosmic Flip</div>
+          <div class="game-folder">32-cosmic-flip</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/33-deep-cast/index.html" class="game-card" data-name="33 deep cast">
+        <div class="game-num">33</div>
+        <div class="game-info">
+          <div class="game-name">Deep Cast</div>
+          <div class="game-folder">33-deep-cast</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/34-fairway-fury/index.html" class="game-card" data-name="34 fairway fury">
+        <div class="game-num">34</div>
+        <div class="game-info">
+          <div class="game-name">Fairway Fury</div>
+          <div class="game-folder">34-fairway-fury</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/35-ring-champion/index.html" class="game-card" data-name="35 ring champion">
+        <div class="game-num">35</div>
+        <div class="game-info">
+          <div class="game-name">Ring Champion</div>
+          <div class="game-folder">35-ring-champion</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/36-sky-vipers/index.html" class="game-card" data-name="36 sky vipers">
+        <div class="game-num">36</div>
+        <div class="game-info">
+          <div class="game-name">Sky Vipers</div>
+          <div class="game-folder">36-sky-vipers</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/37-iron-siege/index.html" class="game-card" data-name="37 iron siege">
+        <div class="game-num">37</div>
+        <div class="game-info">
+          <div class="game-name">Iron Siege</div>
+          <div class="game-folder">37-iron-siege</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/38-outbreak-zone/index.html" class="game-card" data-name="38 outbreak zone">
+        <div class="game-num">38</div>
+        <div class="game-info">
+          <div class="game-name">Outbreak Zone</div>
+          <div class="game-folder">38-outbreak-zone</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/39-chefs-arena/index.html" class="game-card" data-name="39 chefs arena">
+        <div class="game-num">39</div>
+        <div class="game-info">
+          <div class="game-name">Chef's Arena</div>
+          <div class="game-folder">39-chefs-arena</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/40-cipher-quest/index.html" class="game-card" data-name="40 cipher quest">
+        <div class="game-num">40</div>
+        <div class="game-info">
+          <div class="game-name">Cipher Quest</div>
+          <div class="game-folder">40-cipher-quest</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/41-jungle-rush/index.html" class="game-card" data-name="41 jungle rush">
+        <div class="game-num">41</div>
+        <div class="game-info">
+          <div class="game-name">Jungle Rush</div>
+          <div class="game-folder">41-jungle-rush</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/42-grand-circuit/index.html" class="game-card" data-name="42 grand circuit">
+        <div class="game-num">42</div>
+        <div class="game-info">
+          <div class="game-name">Grand Circuit</div>
+          <div class="game-folder">42-grand-circuit</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/43-ancient-relic-hunter/index.html" class="game-card" data-name="43 ancient relic hunter">
+        <div class="game-num">43</div>
+        <div class="game-info">
+          <div class="game-name">Ancient Relic Hunter</div>
+          <div class="game-folder">43-ancient-relic-hunter</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/44-biohazard-outbreak/index.html" class="game-card" data-name="44 biohazard outbreak">
+        <div class="game-num">44</div>
+        <div class="game-info">
+          <div class="game-name">Biohazard Outbreak</div>
+          <div class="game-folder">44-biohazard-outbreak</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+      <a href="games/45-realm-of-time/index.html" class="game-card" data-name="45 realm of time">
+        <div class="game-num">45</div>
+        <div class="game-info">
+          <div class="game-name">Realm of Time</div>
+          <div class="game-folder">45-realm-of-time</div>
+        </div>
+        <div class="game-arrow">&#9654;</div>
+      </a>
+
+    </div>
+
+    <!-- ── CONTROLS TABLE ── -->
+    <div class="controls-section">
+      <div class="section-label">Standard Controls</div>
+      <div class="controls-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Input</th>
+              <th>Action</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="key">W</span> <span class="key">A</span> <span class="key">S</span> <span class="key">D</span></td>
+              <td class="action">Move / Navigate</td>
+              <td class="desc">Primary movement in all games</td>
+            </tr>
+            <tr>
+              <td><span class="key">Arrow Keys</span></td>
+              <td class="action">Alternative Move</td>
+              <td class="desc">Directional navigation fallback</td>
+            </tr>
+            <tr>
+              <td><span class="key">Space</span></td>
+              <td class="action">Jump / Confirm / Shoot</td>
+              <td class="desc">Context-sensitive primary action</td>
+            </tr>
+            <tr>
+              <td><span class="key">Enter</span></td>
+              <td class="action">Confirm / Start</td>
+              <td class="desc">Menu selection and game start</td>
+            </tr>
+            <tr>
+              <td><span class="key">Escape</span> / <span class="key">P</span></td>
+              <td class="action">Pause / Menu</td>
+              <td class="desc">Toggle pause overlay</td>
+            </tr>
+            <tr>
+              <td><span class="key">R</span></td>
+              <td class="action">Restart / Reset</td>
+              <td class="desc">Quick-restart current level</td>
+            </tr>
+            <tr>
+              <td><span class="key">M</span></td>
+              <td class="action">Toggle Mute</td>
+              <td class="desc">Audio on/off</td>
+            </tr>
+            <tr>
+              <td><span class="key">Mouse Click</span></td>
+              <td class="action">Interact / Select</td>
+              <td class="desc">UI and in-game interaction</td>
+            </tr>
+            <tr>
+              <td><span class="key">Touch</span></td>
+              <td class="action">Full Touch Controls</td>
+              <td class="desc">Virtual buttons on mobile</td>
+            </tr>
+            <tr>
+              <td><span class="key">Gamepad</span></td>
+              <td class="action">Full Controller Support</td>
+              <td class="desc">Xbox / PlayStation / generic</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <span class="brand">NGN5 GAME ENGINE v5.0</span> &mdash; Proprietary &mdash; All rights reserved. &copy; 2025 sbidesigns
+  </footer>
+
+</div>
+
+<!-- ═══ SEARCH ═══ -->
+<script>
+  const searchInput = document.getElementById('search');
+  const gameCards = document.querySelectorAll('.game-card');
+  const grid = document.getElementById('gameGrid');
+
+  let noResultsMsg = document.createElement('div');
+  noResultsMsg.className = 'no-results';
+  noResultsMsg.textContent = 'No games found matching your search.';
+
+  searchInput.addEventListener('input', function() {
+    const q = this.value.toLowerCase().trim();
+    let visible = 0;
+
+    gameCards.forEach(function(card) {
+      const name = card.getAttribute('data-name');
+      const match = name.includes(q);
+      card.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+
+    if (visible === 0 && q.length > 0) {
+      grid.appendChild(noResultsMsg);
+    } else {
+      if (noResultsMsg.parentNode) noResultsMsg.parentNode.removeChild(noResultsMsg);
+    }
+  });
+</script>
+
 </body>
 </html>

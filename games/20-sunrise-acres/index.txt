@@ -1,0 +1,38 @@
+NGN4 Game #20: Sunrise Acres
+=============================
+Genre: Top-Down Farming Simulator
+Story: You inherited your grandfather's farm. Restore it to glory and become the champion of the Harvest Festival.
+
+Features:
+- 12 crop types: Wheat, Corn, Tomato, Carrot, Strawberry, Pumpkin, Potato, Lettuce, Melon, Grape, Cabbage, Snow Pea
+- 6 animal types: Chicken, Cow, Pig, Sheep, Horse, Duck
+- 4 seasons (Spring, Summer, Fall, Winter) with 30 days each
+- Different crops available per season
+- Market with fluctuating prices (buy seeds, sell produce)
+- Tool system: Hoe, Water Can, Harvest, Plant Seeds, Pet Animals, Remove
+- Tool upgrades (Better Watering Can, Better Hoe, Bigger Bag, Farm Expansion)
+- NPC neighbor quest system (8 unique quests)
+- Energy system with day/night cycle
+- Animal product collection (Eggs, Milk, Truffles, Wool, Duck Eggs)
+- Harvest Festival competition with Gold/Silver/Bronze tiers
+- Save/load farm progress
+- Visual crop growth stages (3 stages)
+- Seasonal visual themes
+
+Controls:
+- 1-6: Select tool
+- Click: Use selected tool on tile
+- M: Open market
+- N: Next day
+- F: Enter Harvest Festival
+
+Rewards:
+- Sell crops and animal products for coins
+- Festival awards: +30 to +500 coins based on tier
+- Quest completion rewards: +150 to +400 coins
+- Coins earned through market transactions
+
+Ad Integration:
+- Rewarded ad for instant crop growth
+- Interstitial ad between seasons
+- Rewarded ad for energy refill option

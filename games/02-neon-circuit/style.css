@@ -1,0 +1,100 @@
+/* NGN4 Shared Styles - Neon Circuit */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background: #0a0a0f;
+    color: #e0e0e0;
+    font-family: 'Share Tech Mono', monospace;
+    overflow: hidden;
+    width: 100vw; height: var(--ngn-vh);
+    display: flex; justify-content: center; align-items: center;
+}
+#game-container { position: relative; width: 100vw; height: var(--ngn-vh); }
+#gameCanvas { display: block; width: 100%; height: 100%; background: #0a0a0f; touch-action: none; }
+#ui-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; }
+#ui-overlay .screen, #ui-overlay button { pointer-events: auto; }
+.hidden { display: none !important; }
+
+#hud { position: absolute; top: 0; left: 0; width: 100%; padding: 8px 12px; background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%); z-index: 20; }
+#hud-top { display: flex; justify-content: space-between; align-items: flex-start; }
+#hud-left, #hud-right { flex: 0 0 auto; min-width: 120px; }
+#hud-center { text-align: center; }
+#speed-display, #race-time { font-size: 13px; color: #00ffaa; }
+#position-display { font-family: 'Orbitron', sans-serif; font-size: 22px; color: #ffcc00; text-shadow: 0 0 10px #ffcc0044; }
+#lap-display { font-size: 11px; color: #888; }
+#boost-display { color: #ff6600; font-size: 12px; animation: comboPulse 0.4s ease infinite alternate; }
+#race-coins { font-size: 13px; color: #ffaa00; margin-top: 2px; }
+#hud-bottom { display: flex; justify-content: space-between; margin-top: 4px; font-size: 10px; color: #666; }
+#drift-display { color: #ff00ff; font-size: 16px; font-family: 'Orbitron', sans-serif; animation: comboPulse 0.3s ease infinite alternate; }
+@keyframes comboPulse { from { transform: scale(1); } to { transform: scale(1.15); } }
+
+.screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(5,5,15,0.92); z-index: 30; padding: 20px; }
+.title-container { text-align: center; margin-bottom: 24px; }
+.ngn4-badge { display: inline-block; font-family: 'Orbitron', sans-serif; font-size: 14px; color: #00ffaa; border: 1px solid #00ffaa44; padding: 4px 16px; margin-bottom: 12px; letter-spacing: 4px; text-shadow: 0 0 10px #00ffaa66; }
+.game-title { font-family: 'Orbitron', sans-serif; font-size: clamp(24px,5vw,42px); color: #fff; text-shadow: 0 0 20px #00ffaa44; letter-spacing: 3px; }
+.game-subtitle { font-size: 14px; color: #00ffaa88; margin-top: 8px; letter-spacing: 6px; }
+.story-box { max-width: 500px; text-align: center; padding: 16px 24px; border-left: 2px solid #00ffaa44; border-right: 2px solid #00ffaa44; margin-bottom: 24px; font-size: 13px; line-height: 1.6; color: #aaa; }
+.highlight { color: #00ffaa; text-shadow: 0 0 8px #00ffaa44; }
+.menu-buttons { display: flex; flex-direction: column; gap: 10px; align-items: center; margin-bottom: 20px; }
+.coin-display { font-size: 16px; color: #ffaa00; margin-top: 8px; }
+.controls-info { font-size: 11px; color: #555; text-align: center; line-height: 1.8; }
+.mobile-hint { color: #444; font-size: 10px; }
+
+.btn-primary { font-family: 'Orbitron', sans-serif; font-size: 16px; color: #000; background: linear-gradient(135deg, #00ffaa, #00cc88); border: none; padding: 12px 40px; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; text-transform: uppercase; border-radius: 2px; }
+.btn-primary:hover { box-shadow: 0 0 20px #00ffaa44; transform: translateY(-1px); }
+.btn-secondary { font-family: 'Share Tech Mono', monospace; font-size: 14px; color: #aaa; background: transparent; border: 1px solid #444; padding: 10px 32px; cursor: pointer; letter-spacing: 1px; transition: all 0.2s; border-radius: 2px; }
+.btn-secondary:hover { border-color: #00ffaa88; color: #00ffaa; }
+.btn-ad { font-family: 'Share Tech Mono', monospace; font-size: 13px; color: #ffcc00; background: rgba(255,204,0,0.1); border: 1px solid #ffcc0044; padding: 8px 24px; cursor: pointer; transition: all 0.2s; border-radius: 2px; margin: 6px 0; }
+.btn-ad:hover { background: rgba(255,204,0,0.2); border-color: #ffcc00; }
+
+/* Shop */
+#shop-items { display: flex; flex-direction: column; gap: 12px; margin: 16px 0; width: 100%; max-width: 350px; }
+.shop-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #111; border: 1px solid #333; border-radius: 4px; }
+.shop-name { font-size: 14px; color: #e0e0e0; }
+.shop-level { font-size: 12px; color: #00ffaa; }
+.btn-shop-buy { font-family: 'Share Tech Mono', monospace; font-size: 12px; color: #ffaa00; background: rgba(255,170,0,0.15); border: 1px solid #ffaa0044; padding: 6px 14px; cursor: pointer; border-radius: 2px; }
+.btn-shop-buy:hover { background: rgba(255,170,0,0.3); }
+.btn-shop-buy:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Track Select */
+#track-list { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; width: 100%; max-width: 350px; }
+.track-item { padding: 12px 16px; background: #111; border: 1px solid #333; cursor: pointer; transition: all 0.2s; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+.track-item:hover { border-color: #00ffaa66; }
+.track-item.locked { opacity: 0.4; cursor: not-allowed; }
+.track-item .tname { font-size: 14px; }
+.track-item .tdiff { font-size: 11px; color: #ff6600; }
+
+/* Results */
+#results-stats { text-align: center; margin: 16px 0; font-size: 14px; line-height: 2; color: #aaa; }
+#results-stats span { color: #ffcc00; }
+
+/* Ad */
+.ad-container { width: 100%; max-width: 400px; text-align: center; }
+.ad-header { font-size: 10px; color: #666; letter-spacing: 3px; margin-bottom: 12px; }
+.ad-content { background: #111; border: 1px solid #333; padding: 20px; margin-bottom: 12px; }
+.ad-fake { text-align: center; }
+.ad-game-preview { font-family: 'Orbitron', sans-serif; font-size: 24px; color: #ff6600; margin-bottom: 12px; }
+.ad-tagline { color: #888; font-size: 12px; margin-bottom: 16px; }
+.ad-cta { display: inline-block; background: #ff6600; color: #000; padding: 8px 24px; font-family: 'Orbitron', sans-serif; font-size: 12px; letter-spacing: 2px; border-radius: 2px; }
+.ad-timer { font-size: 12px; color: #666; margin-bottom: 12px; }
+.reward-progress { width: 100%; height: 8px; background: #222; border-radius: 4px; overflow: hidden; margin: 12px 0; }
+.reward-bar { height: 100%; background: linear-gradient(90deg, #00ffaa, #00cc88); width: 0%; transition: width 0.3s; border-radius: 4px; }
+
+/* Countdown */
+#countdown-text { font-family: 'Orbitron', sans-serif; font-size: 120px; color: #00ffaa; text-shadow: 0 0 40px #00ffaa66; animation: countAnim 1s ease infinite; }
+@keyframes countAnim { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+.screen h2 { font-family: 'Orbitron', sans-serif; font-size: clamp(20px,4vw,32px); color: #fff; margin-bottom: 8px; text-shadow: 0 0 15px #00ffaa33; }
+
+/* Mobile controls */
+#mobile-controls { position: absolute; bottom: 20px; left: 0; width: 100%; display: none; justify-content: space-between; padding: 0 20px; z-index: 25; pointer-events: auto; }
+.mobile-btn { width: 60px; height: 60px; background: rgba(0,255,170,0.15); border: 1px solid #00ffaa44; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #00ffaa; user-select: none; -webkit-user-select: none; }
+.mobile-btn:active { background: rgba(0,255,170,0.3); }
+.mobile-lr { display: flex; gap: 10px; }
+
+@media (max-width: 768px) {
+    #mobile-controls { display: flex; }
+}
+@media (max-width: 600px) {
+    #hud-top { flex-wrap: wrap; gap: 4px; }
+    #hud-left, #hud-right { min-width: 90px; }
+}

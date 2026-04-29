@@ -1,0 +1,22 @@
+NGN4 Game 6: Realm of Echoes
+=============================
+Genre: RPG Adventure
+Engine: Canvas 2D
+Controls: WASD to move, click to interact, 1/2 for potions
+
+Story:
+The Realm of Echoes is fractured. Ancient spirits have gone mad, and only a Wanderer bonded to an Echo Spirit can restore balance. Descend through 5 dungeon floors, defeat enemies, find equipment, and face the Echo Dragon Lord.
+
+Features:
+- Procedural dungeon generation with rooms and corridors
+- 4 enemy types: Slime, Skeleton, Dark Mage, Dragon
+- Turn-based combat with Attack, Magic, Items, Flee
+- XP/Leveling system with stat growth
+- Equipment system: Sword, Shield, Armor
+- Inventory: HP Potions, MP Potions
+- 5 dungeon floors with boss on floor 5
+- Minimap navigation
+- Shop for equipment and potions
+- NGN4 coin rewards and ad integration between floors
+
+File: index.html, style.css, game.js

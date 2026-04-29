@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #050508;
+  color: #e0e0e0;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: var(--ngn-vh);
+  overflow: hidden;
+}
+
+#game-container {
+  position: relative;
+  width: 800px;
+  height: 600px;
+  background: #080810;
+  border: 2px solid #1a0a0a;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.1);
+}
+
+.screen {
+  display: none;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  z-index: 10;
+}
+
+.screen.active { display: flex; }
+
+.title {
+  font-size: 42px;
+  color: #f44;
+  text-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+  margin-bottom: 10px;
+  letter-spacing: 4px;
+}
+
+.title.success { color: #0f0; text-shadow: 0 0 20px rgba(0, 255, 0, 0.5); }
+.title.danger { color: #f00; text-shadow: 0 0 30px rgba(255, 0, 0, 0.7); }
+
+.subtitle {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+  letter-spacing: 6px;
+}
+
+.story-text {
+  max-width: 500px;
+  color: #888;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.btn {
+  background: transparent;
+  border: 2px solid #f44;
+  color: #f44;
+  padding: 12px 32px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 5px;
+  transition: all 0.3s;
+  letter-spacing: 2px;
+}
+
+.btn:hover {
+  background: #f44;
+  color: #050508;
+  box-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+}
+
+.coins-display { margin-top: 20px; font-size: 20px; color: #ff0; }
+
+.hud {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.9);
+  border-bottom: 1px solid #1a0a0a;
+  font-size: 13px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 5;
+  color: #f44;
+}
+
+canvas {
+  background: #000;
+  margin-top: 36px;
+}
+
+.inventory-bar {
+  display: flex;
+  gap: 4px;
+  padding: 4px 10px;
+  position: absolute;
+  bottom: 28px;
+  left: 0;
+  z-index: 5;
+}
+
+.inv-slot {
+  width: 44px;
+  height: 44px;
+  background: rgba(20, 20, 20, 0.9);
+  border: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  position: relative;
+}
+
+.inv-slot.has-item { border-color: #f44; }
+.inv-slot .slot-key {
+  position: absolute;
+  top: 1px;
+  left: 3px;
+  font-size: 9px;
+  color: #666;
+}
+
+.controls-hint {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 6px;
+  font-size: 11px;
+  color: #444;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.inv-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 80px);
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.inv-item {
+  width: 80px;
+  height: 80px;
+  background: #111;
+  border: 2px solid #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.inv-item .iname { font-size: 9px; color: #888; margin-top: 4px; }
+
+.reward-text { font-size: 24px; color: #ff0; margin: 15px 0; }
+
+.ad-mockup {
+  background: #111;
+  border: 2px solid #333;
+  padding: 20px;
+  width: 400px;
+  text-align: center;
+}
+
+.ad-label { background: #f00; color: #fff; padding: 4px; font-size: 11px; margin-bottom: 15px; letter-spacing: 2px; }
+.ad-timer { margin-top: 15px; font-size: 14px; color: #888; }
+.ad-timer span { color: #f44; font-size: 20px; }
+
+#chapter-stats { color: #aaa; line-height: 2; }

@@ -1,0 +1,60 @@
+NGN4 GAME 30: BRAIN VAULT
+════════════════════════════════════════════════
+Trivia/Quiz Game
+
+STORY: The Brain Vault contains all knowledge. Prove your intellect to unlock its deepest chambers.
+
+GAMEPLAY:
+- Answer 15 multiple-choice questions per quiz round
+- Choose difficulty: Easy (15s), Medium (10s), Hard (7s)
+- Build streaks for bonus points
+- Use lifelines when stuck
+- Master categories for bonus rewards
+
+FEATURES:
+- 110+ questions across 10 categories:
+  * Science (12), History (12), Gaming (12), Space (11)
+  * Music (10), Movies (11), Tech (11), Nature (10)
+  * Geography (10), Pop Culture (11)
+- 3 difficulty modes with time limits
+- Streak bonus system (consecutive correct = score multiplier)
+- 3 lifelines: 50/50, Skip, Ask Audience
+- 15-round quiz format
+- Speed-based scoring (faster = more points)
+- Category mastery system (80%+ = bonus 100 coins)
+- Personal leaderboard (top 20 scores)
+- Grade system: Genius/Expert/Skilled/Learner/Novice
+
+SCORING:
+- Base: 10 points + time bonus per correct answer
+- Difficulty multiplier: Easy x1, Medium x1.5, Hard x2
+- Streak multiplier: +10% per consecutive correct
+- Max streak tracked
+
+REWARDS:
+- +10 coins per correct answer
+- +5 coins per max streak level
+- +50 coins quiz completion
+- +100 coins for 80%+ category mastery
+- Lifelines start free each round
+
+CONTROLS:
+- Click/Tap to select answer
+- Use lifeline buttons when needed
+- Timer auto-advances on timeout
+
+AD INTEGRATION:
+- Between quizzes (every 3rd quiz)
+- Rewarded ad for extra lifeline
+
+CATEGORIES:
+🔬 Science - Physics, Chemistry, Biology
+📜 History - World events and civilizations
+🎮 Gaming - Video games and consoles
+🚀 Space - Astronomy and the cosmos
+🎵 Music - Instruments, genres, artists
+🎬 Movies - Film trivia and directors
+💻 Tech - Computers and technology
+🌿 Nature - Animals, plants, Earth
+🌍 Geography - Countries and landmarks
+🎭 Pop Culture - Books, TV, superheroes

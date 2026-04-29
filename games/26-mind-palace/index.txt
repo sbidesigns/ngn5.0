@@ -1,0 +1,36 @@
+NGN4 GAME 26: MIND PALACE
+════════════════════════════════════════════════
+Memory Match Game
+
+STORY: You are a Mental Architect constructing a Mind Palace. Match the memory fragments to strengthen your cognitive fortress.
+
+GAMEPLAY:
+- Flip 2 cards per turn. If they match, they stay revealed.
+- Clear all pairs to complete each level.
+- Use hints (costs 10 coins) to briefly peek at all cards.
+- Build combos with consecutive matches for bonus rewards.
+
+FEATURES:
+- 20 themed levels with increasing difficulty
+- Grid sizes from 4x3 to 6x6
+- 4 card themes: Symbols, Colors, Numbers, NGN Characters
+- Move counter, timer, star rating system
+- Combo system with bonus rewards
+- Hint system (costs coins)
+- Star ratings based on moves vs par score
+- Level progression with unlock system
+
+REWARDS:
+- +2 coins per match
+- +20 coins combo bonus (3+ consecutive)
+- +50 coins level clear
+- +15 coins per star earned
+- Hint costs 10 coins
+
+CONTROLS:
+- Click/Tap to flip cards
+- Use Hint button to peek
+
+AD INTEGRATION:
+- Between levels (every other level)
+- Rewarded ad for peek feature

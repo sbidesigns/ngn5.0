@@ -1,0 +1,31 @@
+NGN4 Game #19: Neon Metropolis
+==============================
+Genre: Grid-Based City Builder
+Story: As the newly elected Mayor of Neon District, transform this wasteland into a thriving cyberpunk metropolis.
+
+Features:
+- 15 building types (Residential, Commercial, Industrial, Power Plant, Solar Array, Police, Hospital, School, Park, Road, Fire Station, Stadium, Mall, Apartments, Research Lab)
+- Resource management: Credits, Power, Population, Happiness
+- Building upgrades (3 levels per building)
+- Population growth based on happiness
+- Tax income system based on population
+- Random events (Crime Wave, Festival, Storm, Economic Boom, Pandemic, Tourism, Power Outage, Construction Boom)
+- Achievement milestones (50/100/250/500/1000 population)
+- Statistics dashboard with building breakdown
+- Save/load game progress
+- Construction discount events
+
+Controls:
+- Click building from panel, then click grid to place
+- D: Toggle demolish mode
+- U: Upgrade hovered building
+- Space: Advance to next day
+
+Rewards:
+- Tax income = coins earned per day
+- Milestone rewards: +50 to +1000 coins
+- Population milestones tracked and rewarded
+
+Ad Integration:
+- Rewarded ad for instant building completion
+- Rewarded ad for disaster relief

@@ -1,0 +1,41 @@
+NGN4 Game Engine - Game #11
+Title: Beat Surge
+Genre: Rhythm / Music
+Version: 1.0
+
+STORY:
+In a world where music powers technology, you are a Beat Runner — channeling rhythms to keep the city alive. Hit notes in time with the beat to power the city's systems. Miss too many and the lights go out forever.
+
+GAMEPLAY:
+- Notes fall from the top of the screen in 4 lanes
+- Press D, F, J, K to hit notes as they reach the hit line
+- Timing matters: Perfect (18px), Great (32px), Good (50px), Miss
+- Build combos for score multipliers (up to 8x)
+- Health depletes on misses; song fails at 0 health
+
+FEATURES:
+- 10 songs with BPM from 80-180
+- 3 difficulty levels (Easy/Medium/Hard)
+- Combo system with multipliers (1x-8x)
+- Star rating (1-3 stars per song)
+- Particle effects on note hits
+- Beat pulse visual effects
+- Song unlock system with coins
+- Accuracy tracking per song
+
+CONTROLS:
+D - Lane 1 (Red)
+F - Lane 2 (Green)
+J - Lane 3 (Blue)
+K - Lane 4 (Yellow)
+
+REWARDS:
+- Perfect hit: 10 pts × multiplier
+- Great hit: 7 pts × multiplier
+- Good hit: 3 pts × multiplier
+- Completion bonus: 50 coins per star earned
+- Coins convert from score (score / 10)
+
+AD INTEGRATION:
+- Rewarded ad between songs
+- Rewarded ad to revive on song failure

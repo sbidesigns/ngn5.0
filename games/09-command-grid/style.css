@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#e0e0e0;font-family:'Share Tech Mono',monospace;overflow:hidden;height: var(--ngn-vh);display:flex;flex-direction:column;align-items:center}
+#ngn4-header{width:100%;padding:8px 20px;background:linear-gradient(90deg,#0a0a1a,#0a1a2e,#0a0a1a);border-bottom:1px solid #0f03;display:flex;align-items:center;gap:20px;z-index:100}
+.ngn4-logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:24px;color:#0f0;text-shadow:0 0 10px #0f0,0 0 20px #0f0}
+.ngn4-title{font-family:'Orbitron',sans-serif;font-weight:700;font-size:16px;color:#0ff;letter-spacing:3px}
+.ngn4-coins{margin-left:auto;color:#ff0;font-size:14px}
+#game-container{position:relative;width:800px;height:600px;margin-top:10px}
+canvas{background:#0a0a12;border:1px solid #0f03;display:block;cursor:pointer}
+#ui-overlay{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+#ui-overlay>*{pointer-events:auto}
+.neon-title{font-family:'Orbitron',sans-serif;font-size:28px;color:#0f0;text-shadow:0 0 10px #0f0,0 0 30px #0f0,0 0 60px #0f0;text-align:center;margin-bottom:15px}
+.story-text{max-width:600px;margin:0 auto 20px;text-align:center;color:#aaa;line-height:1.6;font-size:13px}
+.neon-btn{font-family:'Orbitron',sans-serif;padding:10px 30px;background:transparent;border:1px solid #0f0;color:#0f0;cursor:pointer;font-size:14px;transition:all .3s;display:block;margin:8px auto;letter-spacing:2px}
+.neon-btn:hover{background:#0f02;color:#fff;box-shadow:0 0 15px #0f05}
+.neon-btn.small-btn{padding:4px 12px;font-size:10px;display:inline-block;margin:2px}
+.hidden{display:none!important}
+#menu-screen{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;width:90%;z-index:10}
+#game-hud{position:absolute;top:0;left:0;width:800px;padding:5px 10px;background:linear-gradient(180deg,#0a0a1a99,#0a0a1a00);display:flex;gap:15px;align-items:center;font-size:11px;z-index:50}
+#game-hud span{color:#0f0}
+#unit-panel{position:absolute;right:10px;top:50px;background:#0a0a1aee;border:1px solid #0f0;padding:10px;min-width:140px;font-size:11px;z-index:50}
+#up-name{color:#0f0;font-family:'Orbitron',sans-serif;font-size:12px;margin-bottom:4px}
+#up-stats{color:#aaa;line-height:1.6;margin-bottom:6px}
+#ad-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:#000a;z-index:200;display:flex;align-items:center;justify-content:center}
+.ad-box{background:#111;border:1px solid #0f0;padding:20px;max-width:400px;width:90%;text-align:center}
+.ad-header{color:#0f0;font-size:10px;letter-spacing:4px;margin-bottom:10px}
+.ad-reward{background:#0f0f!important;border-color:#0f0!important;color:#0f0!important}
+#results-screen{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;background:#0a0a1aee;border:1px solid #0f0;padding:30px;min-width:350px;z-index:20}
+#results-details{text-align:left;margin:15px 0;font-size:13px;line-height:2;color:#aaa}
+#results-details span{color:#0f0}
+#briefing-screen{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;background:#0a0a1aee;border:1px solid #0ff;padding:25px;min-width:400px;z-index:20}
+.briefing-text{color:#aaa;font-size:13px;line-height:1.8;margin:15px 0;text-align:left}
+#ai-thinking{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Orbitron',sans-serif;font-size:20px;color:#f00;text-shadow:0 0 15px #f00;z-index:30;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}

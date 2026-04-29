@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0806;color:#e0d8c8;font-family:'Share Tech Mono',monospace;overflow:hidden;display:flex;justify-content:center;align-items:center;height: var(--ngn-vh)}
+#game-container{position:relative;width:900px;height:700px}
+canvas{display:block;background:#0a0806;border:1px solid #2a2010;border-radius:4px}
+.screen{position:absolute;top:0;left:0;width:100%;height:100%;display:none;flex-direction:column;justify-content:center;align-items:center;background:rgba(10,8,6,0.97);z-index:10;text-align:center;padding:20px}
+.screen.active{display:flex}
+.game-title{font-family:'Cinzel',serif;font-size:44px;color:#f80;text-shadow:0 0 20px rgba(255,136,0,0.6),0 0 40px rgba(255,136,0,0.3),0 0 80px rgba(255,136,0,0.15);margin-bottom:5px;letter-spacing:4px;font-weight:900}
+.subtitle{color:#a86;font-size:14px;letter-spacing:3px;margin-bottom:10px}
+.story-text{max-width:650px;line-height:1.7;color:#b0a080;margin:10px 0 20px;font-size:13px}
+.obj-text{color:#f80;font-size:14px;margin:8px 0 18px;max-width:600px;line-height:1.6}
+.gold-text{color:#f80;font-style:italic;margin-top:10px}
+.gold-btn{background:transparent;border:1px solid #f80;color:#f80;padding:12px 30px;font-family:'Cinzel',serif;font-size:14px;cursor:pointer;margin:6px;transition:all .25s;letter-spacing:2px;text-transform:uppercase}
+.gold-btn:hover{background:#f80;color:#0a0806;box-shadow:0 0 25px rgba(255,136,0,0.5)}
+.gold-btn:disabled{opacity:0.3;cursor:not-allowed;box-shadow:none}
+.gold-btn:disabled:hover{background:transparent;color:#f80}
+.menu-buttons{margin:12px 0;display:flex;flex-wrap:wrap;justify-content:center}
+.coins-display{color:#f80;font-size:16px;margin-top:12px;letter-spacing:2px}
+.key{color:#f80;border:1px solid #f80;padding:2px 8px;border-radius:3px;font-size:12px}
+.how-content{text-align:left;max-width:500px;line-height:2.2;margin:12px 0}
+.how-content p{font-size:13px;color:#ccc}
+.hud{position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:5}
+.hud.hidden{display:none}
+.hud-top{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(10,8,6,0.85);font-size:11px;flex-wrap:wrap;gap:4px;border-bottom:1px solid #2a2010}
+.hud-bottom{position:absolute;bottom:0;left:0;width:100%;padding:6px 12px;background:rgba(10,8,6,0.85);font-size:12px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #2a2010}
+.hud-hp{color:#4c4}.hud-armor{color:#88c}.hud-weapon{color:#f80}.hud-ammo{color:#ff0}.hud-level{color:#a8e}.hud-xp{color:#8cf}.hud-coins{color:#f80}
+.hud-interact{color:#f80;font-size:14px;animation:pulse 1s infinite}
+.hud-relics{color:#f80;font-size:12px}.hud-keys{color:#ff0;font-size:12px}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.ad-mockup{width:400px;height:220px;border:2px solid #f80;display:flex;flex-direction:column;justify-content:center;align-items:center;margin:15px 0;background:linear-gradient(135deg,#1a1005,#0d0804)}
+.ad-fake{font-size:24px;color:#f80;text-shadow:0 0 15px rgba(255,136,0,0.5);font-family:'Cinzel',serif}
+.ad-fake-sub{color:#a08060;font-size:12px;margin-top:8px}
+.ad-timer{font-size:48px;color:#f80;margin-top:15px;text-shadow:0 0 20px rgba(255,136,0,0.6)}
+.ad-skip-text{color:#665;font-size:11px;margin-top:8px}
+.result-stats{margin:12px 0;font-size:14px;line-height:2}
+.result-stats p{color:#ccc}
+.result-stats span{color:#f80}
+.inventory-panel{max-width:600px;width:100%;max-height:400px;overflow-y:auto;margin:12px 0}
+.inv-section{margin:10px 0;border:1px solid #2a2010;border-radius:4px;padding:10px}
+.inv-section h3{color:#f80;font-size:14px;margin-bottom:8px;text-align:left;font-family:'Cinzel',serif}
+.inv-item{display:flex;justify-content:space-between;padding:4px 0;font-size:13px;color:#ccc;border-bottom:1px solid #1a1208}
+.inv-item .item-name{color:#e0d0b0}.inv-item .item-val{color:#f80}
+.world-map{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:15px 0;max-width:650px}
+.map-node{width:120px;height:90px;border:2px solid #2a2010;border-radius:6px;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;transition:all .2s;background:#12100a}
+.map-node:hover{border-color:#f80;box-shadow:0 0 15px rgba(255,136,0,0.3)}
+.map-node.selected{border-color:#f80;box-shadow:0 0 20px rgba(255,136,0,0.4);background:#1a1205}
+.map-node.completed{border-color:#4a4;background:#0a120a}
+.map-node.locked{opacity:0.35;cursor:not-allowed}
+.map-icon{font-size:28px;margin-bottom:4px}
+.map-name{font-size:10px;color:#a08060}
+.map-node.selected .map-name{color:#f80}
+.map-node.completed .map-name{color:#4a4}
+.achievements-list{max-width:600px;width:100%;max-height:420px;overflow-y:auto;margin:12px 0}
+.ach-item{display:flex;align-items:center;padding:8px;margin:3px 0;border:1px solid #1a1208;border-radius:4px}
+.ach-item.unlocked{border-color:#f80;background:#1a1205}
+.ach-icon{font-size:24px;margin-right:10px;width:30px;text-align:center}
+.ach-info{text-align:left;flex:1}
+.ach-name{color:#f80;font-size:13px}.ach-desc{color:#888;font-size:11px}
+.ach-item:not(.unlocked) .ach-name{color:#555}
+.gameover-title{font-family:'Cinzel',serif;font-size:40px;color:#a33;text-shadow:0 0 30px rgba(200,50,50,0.5);margin-bottom:10px}
+.victory-title{font-family:'Cinzel',serif;font-size:30px;color:#f80;text-shadow:0 0 30px rgba(255,136,0,0.6),0 0 60px rgba(255,136,0,0.3);margin-bottom:15px;letter-spacing:2px}
+.level-title{font-family:'Cinzel',serif;font-size:32px;color:#f80;text-shadow:0 0 15px rgba(255,136,0,0.4);margin-bottom:8px}
+.inv-weapon{display:inline-flex;align-items:center;padding:4px 8px;margin:3px;border:1px solid #2a2010;border-radius:3px;font-size:12px;color:#ccc}
+.inv-weapon.active{border-color:#f80;color:#f80}
+.inv-relic{display:inline-flex;align-items:center;padding:4px 8px;margin:3px;border:1px solid #2a2010;border-radius:3px;font-size:12px;color:#888}
+.inv-relic.found{border-color:#f80;color:#f80}

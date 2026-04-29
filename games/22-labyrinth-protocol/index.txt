@@ -1,0 +1,44 @@
+════════════════════════════════════════════════════
+NGN4 GAME #22: LABYRINTH PROTOCOL
+════════════════════════════════════════════════════
+
+TITLE:    Labyrinth Protocol
+GENRE:    First-Person Maze Runner (Raycasting)
+LORE:     "The Labyrinth shifts and adapts. You are a Runner — find the exit before the walls close in forever."
+
+FEATURES:
+  - Raycasting 3D renderer (Wolfenstein 3D style) from 2D map
+  - Procedurally generated mazes (10x10 to 25x25)
+  - 15 levels with increasing size and difficulty
+  - Fog of war minimap — reveals as you explore
+  - Keys 🔑 to unlock exit doors
+  - Collectible gems 💎 for bonus rewards
+  - Traps: teleporters and slow zones
+  - Enemy ghosts that patrol corridors
+  - Time limit per level
+  - Skip maze with gems
+  - Rewarded ad for exit location hint
+
+CONTROLS:
+  - WASD / Arrow keys to move and turn
+  - Mobile touch controls
+  - Collect keys → reach exit to complete level
+
+REWARDS:
+  - +50 coins per level completion
+  - +10 coins per gem collected
+  - Time bonus coins (timeLeft × 2)
+  - Gems added to ngn4_rewards localStorage
+
+SCREENS:
+  - Main menu → How to play → Game (3D view + minimap + HUD)
+  - Level complete results → Game over → Win screen
+  - Rewarded ad between level sets (every 3 levels)
+
+TECH:
+  - Pure Canvas 2D raycasting renderer
+  - Recursive backtracker maze generation
+  - Web Audio oscillators for sound
+  - requestAnimationFrame game loop
+  - Touch support for mobile
+  - localStorage for rewards

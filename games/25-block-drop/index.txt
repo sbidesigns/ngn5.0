@@ -1,0 +1,57 @@
+════════════════════════════════════════════════════
+NGN4 GAME #25: BLOCK DROP
+════════════════════════════════════════════════════
+
+TITLE:    Block Drop
+GENRE:    Tetris
+LORE:     "The Block Matrix is overflowing. As the Architect, you must align the falling blocks before reality collapses."
+
+FEATURES:
+  - All 7 tetrominoes: I, O, T, S, Z, L, J
+  - SRS (Super Rotation System) with wall kicks
+  - Hold piece system (C key)
+  - Next 3 pieces preview
+  - Ghost piece (shadow showing landing position)
+  - T-spin detection with bonus scoring
+  - Combo system for consecutive line clears
+  - DAS (Delayed Auto Shift) for smooth controls
+  - 15 levels with NES-style speed curve
+  - 3 Game Modes:
+    * Marathon: Clear 150 lines
+    * Sprint: Clear 40 lines as fast as possible (timed)
+    * Zen: No goals, no pressure
+  - Scoring: Single=100, Double=300, Triple=500, Tetris=800 (× level)
+  - T-spin bonus scoring
+  - Line clear flash animation
+
+CONTROLS:
+  - Arrow Left/Right or A/D: Move
+  - Arrow Down or S: Soft drop
+  - Arrow Up or W: Rotate clockwise
+  - Z: Rotate counter-clockwise
+  - Space: Hard drop
+  - C: Hold piece
+  - Escape: Pause
+
+REWARDS:
+  - Line clears → coins: 1 line=1, 2=3, 3=5, 4=10
+  - Tetris bonus: +5 coins
+  - Game completion bonus: score/100 + total lines
+  - Continue via ad adds breathing room
+  - All saved to ngn4_rewards
+
+SCREENS:
+  - Main menu (mode select) → How to play → Game
+  - Game: Board + Hold panel + Next preview + Stats
+  - Pause screen → Game complete results → Game over
+  - Rewarded ad for continue
+
+TECH:
+  - Canvas 2D with 3D-style block rendering
+  - 7-bag randomizer
+  - SRS wall kick tables
+  - Ghost piece calculation
+  - requestAnimationFrame loop
+  - Web Audio oscillators
+  - localStorage for rewards
+  - NES-style speed curve

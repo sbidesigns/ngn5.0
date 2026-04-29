@@ -1,0 +1,51 @@
+# NGN4 Game: Neon Circuit
+## 3D Racing
+
+### Overview
+The Neon Circuit is the most dangerous race in the galaxy. Win to earn your freedom from the Corporation's indentured pits.
+
+### Gameplay
+- 3D oval track racing using Babylon.js
+- 3 AI opponents with varying skill levels
+- 3 laps per race
+- 5 tracks with increasing difficulty
+
+### Controls
+- W/↑: Accelerate
+- S/↓: Brake
+- A/← or D/→: Steer
+- SPACE: Activate boost
+
+### Features
+- Speed boost pads on track
+- Drift mechanics
+- Car upgrades (Speed, Acceleration, Handling) purchasable with NGN coins
+- Position tracking (1st-4th)
+- Lap timer with best lap tracking
+- Track unlocking system
+
+### Tracks
+1. Neon Oval (Easy) - Free
+2. Twisted Ring (Medium) - 300 coins
+3. Plasma Loop (Hard) - 600 coins
+4. Void Circuit (Expert) - 1000 coins
+5. Apex Gauntlet (Master) - 2000 coins
+
+### Rewards
+- 1st Place: +200 coins
+- 2nd Place: +100 coins
+- 3rd Place: +50 coins
+- 4th Place: +25 coins
+- Fast lap bonus: +50 coins (under 15s)
+- Watch ad for double prize money
+
+### Ad Integration
+- Interstitial ads between races
+- Rewarded ads on results screen for double coins
+
+### Technical
+- Babylon.js CDN for 3D rendering
+- Neon glow effects with Babylon.js GlowLayer
+- Elliptical track generation
+- Chase camera system
+- localStorage for upgrades and progress

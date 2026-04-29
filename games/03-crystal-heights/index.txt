@@ -1,0 +1,56 @@
+# NGN4 Game: Crystal Heights
+## 3D Platformer
+
+### Overview
+The Crystal Spires hold ancient power. Climb ever higher to reach the Apex Crystal before the Shadow Council claims it.
+
+### Gameplay
+- 3D platform climbing using Babylon.js
+- Collect crystals and reach the portal at each level's end
+- 8 levels with increasing complexity
+
+### Controls
+- W/↑/SPACE: Jump (Double Jump supported!)
+- A/D or ←→: Move left/right
+- S/↓: Fast fall
+- Mobile: On-screen directional buttons and jump
+
+### Features
+- Double jump mechanic
+- Moving platforms (from Level 2+)
+- Bounce pads (from Level 4+)
+- Enemy obstacles - patrolling shadows (from Level 3+)
+- 3 Crystal types:
+  - Blue: 100 points + 10 coins
+  - Red: 50 points + health restore
+  - Gold: 500 points + 50 coins
+- Lives system (3 hearts, max 5)
+- Level select screen with star ratings
+
+### Level Progression
+1. Foundation Spire - Learn the basics
+2. Crystal Garden - Moving platforms
+3. Shadow Corridor - Enemies patrol
+4. Bounce Tower - Launch skyward
+5. The Gauntlet - Everything combined
+6. Frozen Ascent - Slippery platforms
+7. Shadow Council - The council awaits
+8. Apex Crystal - The final climb
+
+### Rewards
+- Crystals convert to coins
+- Star rating (1-3) based on completion time
+- Star bonuses: 1★=0, 2★=+100, 3★=+200 coins
+- Level completion bonus
+
+### Ad Integration
+- Interstitial ads between levels
+- Rewarded ad for extra life on level complete
+- Rewarded ad for revive on game over
+
+### Technical
+- Babylon.js CDN for 3D rendering
+- Procedural level generation
+- GlowLayer for neon effects
+- localStorage for star progress
+- Mobile touch controls

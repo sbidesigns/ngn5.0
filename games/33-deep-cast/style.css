@@ -1,0 +1,43 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a0f; color: #e0e0e0; font-family: 'Courier New', monospace; min-height: var(--ngn-vh); display: flex; justify-content: center; align-items: center; overflow-x: hidden; }
+#game-container { width: 540px; max-width: 98vw; padding: 15px; }
+#header { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #1a1a2e; margin-bottom: 15px; }
+.brand { font-size: 1.2rem; font-weight: bold; color: #0af; }
+.accent { color: #0f8; }
+.coins-display { background: #1a1a2e; padding: 5px 15px; border-radius: 20px; color: #ffd700; font-weight: bold; }
+#menu-screen { text-align: center; padding: 20px 0; }
+#menu-screen h1 { font-size: 2.5rem; color: #0af; text-shadow: 0 0 20px #0af; margin-bottom: 10px; }
+.story { color: #888; font-size: 0.85rem; line-height: 1.6; margin-bottom: 20px; }
+.menu-options { display: flex; flex-direction: column; gap: 15px; align-items: center; }
+.menu-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.btn { background: #1a1a2e; color: #e0e0e0; border: 1px solid #333; padding: 8px 16px; cursor: pointer; font-family: 'Courier New', monospace; font-size: 0.8rem; transition: all 0.2s; border-radius: 4px; }
+.btn:hover { background: #2a2a4e; border-color: #0af; color: #0af; }
+.btn.active { background: #0af; color: #0a0a0f; border-color: #0af; font-weight: bold; }
+.primary-btn { background: linear-gradient(135deg, #0af, #0f8); color: #0a0a0f; font-weight: bold; font-size: 1rem; padding: 12px 30px; border: none; }
+.primary-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px #0af; }
+#location-select { margin-top: 10px; }
+#location-select label { color: #0f8; font-size: 0.8rem; display: block; margin-bottom: 5px; }
+.location-btns { display: flex; gap: 5px; flex-wrap: wrap; justify-content: center; }
+#player-stats { background: #111; padding: 10px; border-radius: 6px; font-size: 0.75rem; color: #888; min-width: 250px; line-height: 1.8; text-align: left; }
+#fishing-screen { text-align: center; }
+#fish-hud { display: flex; justify-content: space-around; padding: 8px; margin-bottom: 5px; background: #111; border-radius: 6px; font-size: 0.85rem; }
+#fishing-canvas { border: 2px solid #0af; border-radius: 8px; cursor: pointer; max-width: 100%; box-shadow: 0 0 20px rgba(0,170,255,0.15); }
+#fish-actions { display: flex; gap: 8px; justify-content: center; margin-top: 10px; }
+#fish-message { margin-top: 8px; color: #0f8; font-size: 0.9rem; min-height: 25px; }
+#shop-screen, #journal-screen, #equip-screen, #catch-screen { text-align: center; padding: 20px 0; }
+#shop-screen h2, #journal-screen h2, #equip-screen h2, #catch-screen h2 { color: #0af; margin-bottom: 15px; }
+#shop-items, #journal-list, #equip-list { background: #111; padding: 10px; border-radius: 6px; margin-bottom: 15px; text-align: left; }
+.shop-item, .journal-entry, .equip-item { padding: 8px; border-bottom: 1px solid #222; display: flex; justify-content: space-between; align-items: center; }
+.shop-item button, .equip-item button { padding: 4px 10px; font-size: 0.7rem; }
+.journal-entry.caught { color: #0f0; }
+.journal-entry.uncaught { color: #444; }
+#catch-info { background: #111; padding: 15px; border-radius: 6px; margin: 15px 0; font-size: 1.2rem; }
+#catch-actions { margin-bottom: 15px; }
+#result-screen { text-align: center; padding: 30px 0; }
+#result-screen h2 { font-size: 2rem; color: #0af; margin-bottom: 15px; }
+#result-stats { background: #111; padding: 15px; border-radius: 6px; margin-bottom: 15px; line-height: 1.8; }
+#rewards-earned { color: #ffd700; font-size: 1.1rem; margin-bottom: 20px; }
+.ad-container { background: #1a1a0a; border: 2px dashed #ffd700; border-radius: 8px; padding: 15px; margin: 20px 0; }
+.ad-label { color: #ffd700; font-weight: bold; margin-bottom: 5px; }
+.ad-content { color: #888; font-size: 0.8rem; margin-bottom: 10px; }
+.ad-btn { background: #ffd700; color: #0a0a0f; font-weight: bold; border: none; }

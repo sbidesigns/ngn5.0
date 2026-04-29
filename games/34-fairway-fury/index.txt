@@ -1,0 +1,7 @@
+NGN4 Game #34: Fairway Fury
+Genre: Sports / Mini Golf
+Story: The Intergalactic Mini Golf Championship brings the best putters from across the cosmos. Can you sink the perfect round?
+Features: 18 holes across 3 courses (Neon City, Crystal Cave, Sky Islands), obstacles (walls, water, sand, bumpers, wind, teleporters), par system, stroke counter, scorecard, 3-star rating, ball trail, hole-in-one detection
+Controls: Click and drag on ball to aim, release to shoot
+Rewards: Under par = coins, birdie +10, eagle +25, hole-in-one +100, course completion bonus
+Ad: Rewarded ad for mulligan (redo last hole)

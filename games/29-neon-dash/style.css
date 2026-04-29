@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0f; --fg: #e0e0e0; --accent: #00ff88; --accent2: #ff0055;
+  --card-bg: #111118; --border: #1a1a2e; --muted: #666; --gold: #ffd700; --danger: #ff3333;
+}
+
+body { background: var(--bg); color: var(--fg); font-family: 'JetBrains Mono', monospace; display: flex; justify-content: center; align-items: center; min-height: var(--ngn-vh); overflow: hidden; }
+#game-container { width: 100vw; height: var(--ngn-vh); max-width: 800px; position: relative; overflow: hidden; }
+
+.screen { display: none; position: absolute; inset: 0; flex-direction: column; align-items: center; justify-content: center; padding: 20px; z-index: 1; }
+.screen.active { display: flex; z-index: 10; }
+
+.game-title { font-size: 2.5rem; color: var(--accent); text-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent); margin-bottom: 10px; animation: dash 0.5s ease-in-out infinite alternate; }
+@keyframes dash { 0% { transform: translateX(-3px); } 100% { transform: translateX(3px); } }
+
+.story-text { text-align: center; color: var(--muted); font-size: 0.85rem; max-width: 450px; margin-bottom: 30px; line-height: 1.6; }
+.menu-buttons { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+
+.btn { font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 700; padding: 14px 36px; border: 2px solid var(--accent); background: transparent; color: var(--accent); cursor: pointer; border-radius: 4px; transition: all 0.2s; min-width: 220px; text-align: center; }
+.btn:hover { background: var(--accent); color: var(--bg); box-shadow: 0 0 20px var(--accent); }
+.btn-primary { border-color: var(--accent); color: var(--accent); }
+.btn-secondary { border-color: var(--gold); color: var(--gold); }
+.btn-secondary:hover { background: var(--gold); color: var(--bg); box-shadow: 0 0 20px var(--gold); }
+.btn-info { border-color: #6666ff; color: #6666ff; }
+.btn-info:hover { background: #6666ff; color: var(--bg); }
+.btn-back { border-color: var(--muted); color: var(--muted); min-width: 160px; }
+.btn-back:hover { border-color: var(--fg); color: var(--fg); background: transparent; box-shadow: none; }
+.btn-small { padding: 6px 14px; font-size: 0.7rem; min-width: auto; }
+
+.menu-stats { display: flex; gap: 20px; margin-top: 20px; font-size: 0.85rem; color: var(--gold); }
+
+/* Vehicle Grid */
+.vehicle-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 400px; margin: 20px auto; }
+.vehicle-card {
+  border: 2px solid var(--border); background: var(--card-bg); border-radius: 8px;
+  padding: 15px 10px; text-align: center; cursor: pointer; transition: all 0.2s;
+}
+.vehicle-card:hover { border-color: var(--accent); }
+.vehicle-card.owned { border-color: var(--gold); }
+.vehicle-card.active { border-color: var(--accent); box-shadow: 0 0 10px var(--accent); }
+.vehicle-card.locked { opacity: 0.4; cursor: not-allowed; }
+.v-icon { font-size: 2rem; display: block; margin-bottom: 4px; }
+.v-name { font-size: 0.65rem; color: var(--muted); }
+.v-cost { font-size: 0.6rem; color: var(--gold); margin-top: 2px; }
+
+/* Missions */
+.missions-list { max-width: 450px; width: 100%; max-height: 65vh; overflow-y: auto; padding: 10px; }
+.mission-item {
+  display: flex; align-items: center; gap: 10px; padding: 10px;
+  border: 1px solid var(--border); border-radius: 4px; margin-bottom: 6px;
+  background: var(--card-bg); font-size: 0.8rem;
+}
+.mission-item.completed { border-color: var(--accent); }
+.mission-item .m-icon { font-size: 1.2rem; }
+.mission-item .m-desc { flex: 1; }
+.mission-item .m-progress { color: var(--accent); font-size: 0.7rem; }
+.mission-item .m-reward { color: var(--gold); font-size: 0.7rem; }
+
+/* Game */
+#game-screen { padding: 0; justify-content: flex-start; }
+#game-hud {
+  display: flex; justify-content: space-between; padding: 8px 15px;
+  background: rgba(10,10,15,0.9); border-bottom: 1px solid var(--border);
+  width: 100%; position: absolute; top: 0; left: 0; z-index: 20; font-size: 0.75rem;
+}
+.hud-left, .hud-right { display: flex; gap: 12px; align-items: center; }
+#hud-distance { color: var(--accent); font-weight: 700; font-size: 0.9rem; }
+#hud-speed { color: var(--accent2); }
+#hud-coins-hud { color: var(--gold); }
+#hud-powerup { color: var(--accent); font-size: 0.7rem; }
+#gameCanvas { width: 100%; height: 100%; display: block; }
+
+/* Death */
+#death-screen { gap: 12px; }
+.death-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 0.8rem; max-width: 300px; width: 100%; }
+.death-stats-grid div { background: var(--card-bg); padding: 8px; border-radius: 4px; border: 1px solid var(--border); text-align: center; }
+.rewards-display { background: var(--card-bg); border: 1px solid var(--gold); border-radius: 8px; padding: 12px 20px; text-align: center; }
+.rewards-display .reward-line { color: var(--gold); font-size: 0.9rem; margin: 3px 0; }
+
+/* Ad */
+.ad-mockup { background: #1a1a2e; border: 2px solid var(--accent); border-radius: 12px; padding: 30px; text-align: center; max-width: 320px; width: 100%; }
+.ad-header { color: var(--muted); font-size: 0.65rem; margin-bottom: 15px; letter-spacing: 3px; }
+.ad-icon { font-size: 3rem; margin-bottom: 10px; }
+.ad-sub { color: var(--muted); font-size: 0.8rem; margin-top: 5px; }
+.ad-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-top: 20px; overflow: hidden; }
+.ad-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 3px; width: 0%; transition: width 0.5s linear; }
+#ad-timer { color: var(--accent); font-size: 0.9rem; display: block; margin-top: 8px; }
+.btn-ad { margin-top: 15px; border-color: var(--accent); color: var(--accent); min-width: 160px; }
+.btn-ad:hover { background: var(--accent); color: var(--bg); box-shadow: 0 0 20px var(--accent); }
+
+.toast { position: fixed; top: 60px; left: 50%; transform: translateX(-50%) translateY(-100px); background: var(--card-bg); border: 1px solid var(--accent); color: var(--accent); padding: 10px 24px; border-radius: 6px; font-size: 0.85rem; z-index: 200; transition: transform 0.3s ease; pointer-events: none; }
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+@media (max-width: 600px) {
+  .game-title { font-size: 2rem; }
+  .vehicle-grid { grid-template-columns: repeat(2, 1fr); }
+}

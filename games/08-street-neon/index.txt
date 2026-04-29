@@ -1,0 +1,21 @@
+NGN4 Game 8: Street Neon
+=========================
+Genre: Beat 'em Up
+Engine: Canvas 2D
+Controls: Arrow Keys to move, Z = Attack, X = Jump, C = Special (when meter full)
+
+Story:
+The Neon Syndicate controls the streets. You're an ex-enforcer with a score to settle. Fight through 6 stages of neon-lit streets to defeat the Syndicate.
+
+Features:
+- 3 playable characters: Brawler, Ninja, Tech
+- Combo chain attack system
+- 6 stages with unique backgrounds and enemy waves
+- Boss fights on each stage
+- Special meter with unique abilities per character
+- Health and special pickups
+- Combo counter with bonus rewards
+- Parallax scrolling backgrounds with neon aesthetics
+- NGN4 coin rewards and ad integration between stages
+
+File: index.html, style.css, game.js

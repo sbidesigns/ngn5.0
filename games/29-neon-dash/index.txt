@@ -1,0 +1,51 @@
+NGN4 GAME 29: NEON DASH
+════════════════════════════════════════════════
+Endless Runner Game
+
+STORY: Running through the digital highway at lightspeed. Dodge obstacles, collect data fragments, never stop.
+
+GAMEPLAY:
+- Auto-run, tap/click/space/up to jump (double-jump available)
+- Swipe down/ArrowDown to slide under low beams
+- Dodge obstacles: barriers, gaps, low beams, laser grids
+- Collect coins for rewards
+- Grab power-ups for special abilities
+
+FEATURES:
+- 5 vehicles with unique bonuses:
+  * Runner (free), Hoverboard (100), Motorcycle (250), Sports Car (500), Jet (1000)
+- Vehicle bonuses: Float, Speed boost, Shield, Fly
+- 4 obstacle types with varied mechanics
+- 4 power-ups: Magnet, Shield, 2x Coins, Mega Jump
+- 10 progressive missions
+- Increasing speed with distance
+- Double-jump mechanic
+- Particle effects and neon visuals
+- City background with buildings and stars
+
+REWARDS:
+- +1 coin per coin collected (x2 with power-up)
+- +10 coins per power-up collected
+- Mission completion bonuses (30-120 coins)
+- Vehicle upgrades cost coins
+
+CONTROLS:
+- Click/Tap/Space/ArrowUp: Jump
+- ArrowDown/Swipe Down: Slide
+- Double-jump available
+
+AD INTEGRATION:
+- Death screen: Rewarded ad for continue with shield
+- Every 5 mission completions
+
+MISSIONS:
+1. Collect 50 coins in one run (+50)
+2. Jump 30 times in one run (+40)
+3. Survive 1000m (+60)
+4. Slide 15 times (+30)
+5. Collect 100 coins total (+80)
+6. Complete 5 runs (+50)
+7. Reach 500m (+70)
+8. Jump 50 times (+50)
+9. Collect 200 coins total (+120)
+10. Reach 2000m (+100)

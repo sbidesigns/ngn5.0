@@ -1,0 +1,22 @@
+NGN4 Game 7: Bastion Protocol
+=============================
+Genre: Tower Defense
+Engine: Canvas 2D
+Controls: Click tower buttons to select, click grid to place. Click placed towers for upgrade/sell.
+
+Story:
+The AI uprising has begun. Deploy defense towers along the data streams to protect the last human server.
+
+Features:
+- 5 tower types: Cannon, Laser, Frost, Tesla, Missile
+- 6 enemy types: Drone, Speeder, Tank, Shield, Heavy, Boss
+- 15 waves per level with increasing difficulty
+- Tower upgrade system (3 levels per tower)
+- Sell towers for 60% refund
+- Lives system (20 lives)
+- Speed control (1x, 2x, 3x)
+- Particle effects and visual feedback
+- Tower range preview on placement
+- NGN4 coin rewards and ad integration between levels
+
+File: index.html, style.css, game.js

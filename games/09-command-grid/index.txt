@@ -1,0 +1,22 @@
+NGN4 Game 9: Command Grid
+===========================
+Genre: Turn-Based Strategy
+Engine: Canvas 2D
+Controls: Click to select units, click to move, click to attack
+
+Story:
+Two rival commanders vie for control of the Grid Sector. Deploy units, capture territory, outmaneuver your opponent.
+
+Features:
+- 5 unit types: Scout, Soldier, Heavy, Sniper, Medic
+- 8 campaign missions with unique maps and objectives
+- Fog of war system
+- Terrain types: Plains, Forest, Mountain, Building, Water
+- Capture 3 of 5 control points to win each mission
+- Counter-attack system when enemies survive
+- AI opponent with tactical decision-making
+- Mission briefings and results with coin rewards
+- Flawless victory bonus
+- NGN4 coin rewards and ad integration between missions
+
+File: index.html, style.css, game.js

@@ -1,0 +1,38 @@
+NGN4 GAME 27: NGN CLICKER
+════════════════════════════════════════════════
+Idle/Clicker Game
+
+STORY: Every great empire starts with a single click. Click to generate data, build processors, and dominate the digital realm.
+
+GAMEPLAY:
+- Click the main node to generate data points
+- Purchase upgrades to auto-generate data
+- Prestige to reset for permanent multipliers and gems
+- Fight bosses for bonus rewards
+- Develop skills in the skill tree
+
+FEATURES:
+- 15 upgrades with exponential cost/gain scaling
+- Auto-production system (cursors, processors, GPUs, servers, data centers, AI, quantum chips, etc.)
+- Prestige system (reset for permanent x1.5 multiplier per prestige + gems)
+- 48 achievements/milestones
+- Offline earnings calculation (50% efficiency, 24h cap)
+- Statistics dashboard
+- Skill tree with 3 branches (Power, Automation, Economy)
+- Boss battles every level with scaling difficulty
+- Data-to-coins exchange system
+
+REWARDS:
+- Data points exchange to NGN4 coins at rate
+- Prestige grants gems
+- Achievements grant +5 coins each
+- Boss defeats grant bonus data
+
+AD INTEGRATION:
+- Rewarded ad for 2x production (60 seconds)
+- Ad bonus: instant offline earnings claim
+
+CONTROLS:
+- Click/Tap the main node to generate data
+- Use tabs to navigate Upgrades, Prestige, Boss
+- Skill Tree accessible from game HUD

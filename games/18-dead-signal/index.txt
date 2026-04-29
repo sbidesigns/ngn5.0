@@ -1,0 +1,36 @@
+NGN4 Game #18: Dead Signal
+===========================
+Genre: Top-Down Horror Survival
+Story: You received a distress signal from a derelict space station. The rescue team never returned. Now you're trapped inside.
+
+Features:
+- 5 chapters with procedurally generated maps
+- Flashlight with battery management
+- Limited visibility (flashlight cone + ambient darkness)
+- Item inventory (batteries, keycards, medkits, signal flares, documents)
+- Creature AI with 4 states: patrol, alert, investigate, chase
+- Creature speeds up over chapters
+- Hiding mechanic (lockers, crates)
+- Puzzle locks requiring keycards
+- Sanity meter affecting visuals
+- Jump scares on death
+- 3 endings based on documents found and death count
+- Documents collectible for lore
+- Progressive difficulty
+
+Controls:
+- WASD: Move
+- F: Toggle flashlight
+- E: Interact (doors, hiding spots)
+- 1-5: Use inventory item
+- Tab: Open inventory
+
+Rewards:
+- +100 coins per chapter completed
+- +50 coins per document found
+- +50 bonus for no-death run
+- +100-300 bonus for endings
+
+Ad Integration:
+- Interstitial ad between chapters
+- Rewarded ad for full battery recharge

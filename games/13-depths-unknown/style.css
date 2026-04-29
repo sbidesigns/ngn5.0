@@ -1,0 +1,48 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a0f; color: #e0e0e0; font-family: 'Courier New', monospace; overflow: hidden; display: flex; justify-content: center; align-items: center; height: var(--ngn-vh); }
+#game-container { position: relative; width: 1000px; height: 600px; background: #0d0d1a; border: 1px solid #1a1a3a; display: flex; }
+canvas { display: block; width: 680px; height: 600px; }
+#sidebar { width: 320px; height: 600px; background: #0a0a14; border-left: 1px solid #1a1a3a; padding: 10px; overflow-y: auto; font-size: 12px; display: none; }
+#sidebar.active { display: block; }
+#player-stats { border-bottom: 1px solid #1a1a3a; padding-bottom: 10px; margin-bottom: 10px; }
+#player-stats h3 { color: #aa66ff; font-size: 16px; margin-bottom: 5px; }
+#player-stats div { margin: 2px 0; color: #aaa; }
+#log { height: 160px; overflow-y: auto; border-bottom: 1px solid #1a1a3a; padding-bottom: 10px; margin-bottom: 10px; font-size: 11px; }
+#log-content div { padding: 2px 0; border-bottom: 1px solid #111; }
+.log-damage { color: #ff3366; }
+.log-heal { color: #66ff66; }
+.log-item { color: #ffcc00; }
+.log-info { color: #6688ff; }
+.log-enemy { color: #ff6644; }
+#inventory-panel h4 { color: #aa66ff; margin-bottom: 5px; }
+#inv-slots { display: flex; flex-wrap: wrap; gap: 4px; }
+.inv-item { background: #1a1a2e; border: 1px solid #333; padding: 3px 6px; font-size: 10px; cursor: pointer; min-width: 80px; }
+.inv-item:hover { border-color: #aa66ff; }
+.inv-item.equipped { border-color: #00ffff; background: #00ffff11; }
+.screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; align-items: center; justify-content: center; background: rgba(10,10,20,0.97); z-index: 10; padding: 20px; }
+.screen.active { display: flex; }
+.neon-title { font-size: 34px; text-shadow: 0 0 10px currentColor, 0 0 30px currentColor; margin-bottom: 15px; letter-spacing: 4px; }
+.story-text { color: #8888aa; max-width: 600px; text-align: center; margin-bottom: 15px; font-size: 13px; line-height: 1.5; }
+.btn { background: transparent; border: 2px solid #aa66ff; color: #aa66ff; font-family: 'Courier New', monospace; font-size: 14px; padding: 8px 24px; cursor: pointer; margin: 5px; transition: all 0.3s; text-transform: uppercase; letter-spacing: 2px; }
+.btn:hover { background: #aa66ff; color: #0a0a0f; box-shadow: 0 0 15px #aa66ff; }
+#class-list { display: flex; gap: 10px; margin: 15px 0; flex-wrap: wrap; justify-content: center; }
+.class-card { background: #1a1a2e; border: 2px solid #333; padding: 12px; width: 140px; text-align: center; cursor: pointer; transition: all 0.2s; }
+.class-card:hover, .class-card.selected { border-color: #aa66ff; }
+.class-card h4 { color: #e0e0e0; margin-bottom: 5px; }
+.class-card p { color: #888; font-size: 10px; line-height: 1.4; }
+.class-card.locked { opacity: 0.4; }
+#menu-coins { margin-top: 10px; color: #ffcc00; font-size: 16px; }
+#death-stats, #win-stats { margin: 15px 0; font-size: 14px; line-height: 2; color: #888; }
+#earned-coins { color: #ffcc00; font-size: 18px; margin: 10px 0; }
+#shop-items { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 15px 0; }
+.shop-item { background: #1a1a2e; border: 1px solid #444; padding: 10px; width: 140px; text-align: center; cursor: pointer; transition: all 0.2s; }
+.shop-item:hover { border-color: #ffcc00; }
+.shop-item h5 { color: #e0e0e0; font-size: 12px; margin-bottom: 3px; }
+.shop-item p { color: #888; font-size: 10px; margin-bottom: 3px; }
+.shop-item .price { color: #ffcc00; font-size: 11px; }
+#ad-mockup { background: linear-gradient(135deg, #1a0a2e, #2e1a0a); border: 2px solid #aa66ff; padding: 40px; text-align: center; width: 400px; }
+.ad-label { color: #666; font-size: 10px; margin-bottom: 20px; }
+.ad-title { color: #ffcc00; font-size: 22px; margin-bottom: 10px; }
+.ad-body { color: #aaa; font-size: 14px; margin-bottom: 20px; }
+.ad-cta { background: #ffcc00; color: #000; padding: 10px 30px; display: inline-block; font-weight: bold; }
+#ad-timer { color: #666; font-size: 12px; margin-top: 15px; }

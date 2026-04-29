@@ -1,0 +1,50 @@
+NGN4 Game Engine - Game #15
+Title: Shadow Veil
+Genre: Stealth Action
+Version: 1.0
+
+STORY:
+Infiltrate the Corporation's most secure facility. You are unseen. You are unstoppable. You are Shadow. Complete 10 levels of increasingly complex infiltration missions.
+
+GAMEPLAY:
+- Top-down stealth action
+- Move with WASD, avoid guard sight cones
+- Reach extraction point to complete each level
+- Complete secondary objectives for bonus rewards
+- Stay undetected for 3-star rating
+
+FEATURES:
+- 10 levels with increasing complexity
+- Guard AI: Patrol, Investigate noise, Alert/Chase
+- Hiding spots: Shadows, Lockers, Vents
+- Distraction items: Coins, Noisemakers
+- Security cameras with sweeping vision cones
+- Locked doors requiring keycards
+- Secondary objectives: Terminals, Documents, Prisoners
+- Detection meter (fills when spotted, decays when hidden)
+- Non-lethal takedowns
+- 3-star rating based on detection count
+- Gadget shop for purchasing equipment
+
+GUARD AI STATES:
+- PATROL: Follows waypoint path
+- INVESTIGATE: Moves toward noise source, then returns to patrol
+- ALERT: Chases player, triggers game over if close enough
+
+CONTROLS:
+WASD - Move
+E - Interact (hide, pick up items, complete objectives)
+T - Non-lethal takedown (requires gadget, must be near guard)
+1 - Throw coin (distraction)
+2 - Throw noisemaker (distraction)
+ESC - Exit hiding spot
+
+REWARDS:
++50 coins per level
++25 bonus for zero detection (3-star)
++10 per secondary objective
+Gadget unlocks via coin shop
+
+AD INTEGRATION:
+- Rewarded ad reveals all guard patrol routes
+- Ads shown between every 3rd level

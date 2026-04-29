@@ -1,0 +1,36 @@
+CIPHER QUEST - NGN4 Game #40
+Puzzle Adventure Game
+
+STORY:
+An ancient cipher holds the key to a lost civilization. Solve puzzles across 10 temples to unlock the final secret.
+
+CONTROLS:
+Mouse/Click - Interact with puzzles
+Each level has unique puzzle mechanics
+
+FEATURES:
+10 levels with different puzzle types:
+  1. Pattern Sequence (repeat the pattern)
+  2. Sliding Puzzle (3x3)
+  3. Logic Gates (AND/OR/NOT wiring)
+  4. Word Cipher (decode encrypted message)
+  5. Pipe Connection (connect start to end)
+  6. Light Reflection (angle mirrors to hit target)
+  7. Color Mixing (combine to match target)
+  8. Simon Says (increasing sequence)
+  9. Maze with Keys
+  10. Final Boss: combination of all types
+
+- Hint system
+- Star rating (1-3 stars per level)
+- Collectible lore fragments in each level
+- Progressive difficulty
+
+REWARDS:
++100 per level complete
++25 per hint not used
++50 per lore fragment
+Bonus for all stars
+
+AD INTEGRATION:
+Rewarded ad between levels for hint

@@ -1,0 +1,31 @@
+CHEF'S ARENA - NGN4 Game #39
+Cooking / Restaurant Management Game
+
+STORY:
+Welcome to Chef's Arena - the ultimate cooking competition. Prepare dishes, serve customers, and become the Neon Culinary Champion.
+
+CONTROLS:
+Mouse - Click ingredients, stations, and serve dishes
+Follow recipe order to prepare dishes correctly
+Click customers to take orders
+
+FEATURES:
+- 30 recipes across 5 cuisines (American, Japanese, Italian, Mexican, Indian)
+- Ingredient stations
+- Cooking stations (Stove, Oven, Grill, Fryer)
+- Timer per order (customer patience)
+- Combo for fast service
+- Upgrade kitchen equipment (faster cooking)
+- Hire assistant chefs
+- 15 levels (unlock new recipes)
+- Tip system based on speed/accuracy
+- Food burning mechanic
+
+REWARDS:
+Tips = coins
+Level completion bonus
+Recipe unlocks
+Kitchen upgrades cost coins
+
+AD INTEGRATION:
+Rewarded ad between levels for instant ingredient restock

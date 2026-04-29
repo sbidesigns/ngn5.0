@@ -1,0 +1,28 @@
+NGN4 Game #16: GravShift
+=======================
+Genre: Physics Puzzle
+Story: A malfunction shifted gravity across the research station. Navigate shifting gravitational fields to reach the emergency shuttle.
+
+Features:
+- 20 levels with increasing difficulty
+- 4-direction gravity rotation (Arrow Keys or 1-4)
+- Physics objects (boxes, balls) affected by gravity
+- Hazards (spikes, lasers)
+- Switches and doors puzzle mechanics
+- Collectible data chips with star rating
+- Full undo system (Z key) and restart (R key)
+- Level select with progress tracking
+
+Controls:
+- Arrow Keys / 1-4: Rotate gravity direction
+- Z: Undo last move
+- R: Restart level
+
+Rewards:
+- +20 coins per level completed
+- +10 coins per star earned (max 3 stars)
+- +5 coins per data chip collected
+
+Ad Integration:
+- Interstitial ad every 5 levels
+- Rewarded ad for skip level option

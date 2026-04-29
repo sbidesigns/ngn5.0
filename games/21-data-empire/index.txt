@@ -1,0 +1,45 @@
+════════════════════════════════════════════════════
+NGN4 GAME #21: DATA EMPIRE
+════════════════════════════════════════════════════
+
+TITLE:    Data Empire
+GENRE:    Incremental / Idle Tycoon
+LORE:     "Start with a garage and a dream. Build a tech empire that dominates the global market."
+
+FEATURES:
+  - 8 Business types: Startup → App → Platform → Cloud → AI → Quantum → Space → Galactic
+  - Incremental click-to-earn mechanics with passive income
+  - Hire managers to automate revenue collection
+  - Prestige system — reset for permanent multiplier boost and gems
+  - Dynamic market events (boom/bust/viral PR/innovation)
+  - Stock market mini-game with real-time price chart
+  - 12 milestone achievements with gem rewards
+  - Rewarded ad system (2x income for 30 seconds)
+  - Auto-save every 10 seconds
+  - Dark neon theme, monospace/Orbitron fonts
+
+CONTROLS:
+  - Click "Generate Revenue" to earn money manually
+  - Buy businesses to unlock passive income streams
+  - Hire managers for automatic collection
+  - Prestige to earn gems and permanent multiplier
+  - Trade stocks in the stock market mini-game
+
+REWARDS:
+  - Income converts to coins (1 coin per $1000 earned)
+  - Prestige earns gems (based on total earned)
+  - Achievements grant +5 gems each
+  - Coins and gems saved to ngn4_rewards (localStorage)
+
+SCREENS:
+  - Main menu → How to play → Game (business panel + actions)
+  - Stock market overlay with real-time chart
+  - Prestige confirmation screen
+  - Rewarded ad mockup (5s timer → 2x income boost)
+
+TECH:
+  - Pure HTML5 Canvas + DOM, no frameworks
+  - Web Audio oscillators for sound effects
+  - localStorage for save/persistence and rewards
+  - requestAnimationFrame game loop
+  - Responsive layout

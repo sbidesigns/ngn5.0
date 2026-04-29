@@ -1,0 +1,24 @@
+NGN4 Game 10: Court Legends
+=============================
+Genre: Basketball
+Engine: Canvas 2D
+Controls: Arrow keys to move, SPACE to shoot/block, A to sprint, S to steal
+
+Story:
+From street courts to the Neon League championship — prove you're the greatest to ever play.
+
+Features:
+- Shot meter system with power and arc timing
+- 4 shot types: Layup, Midrange, Three-pointer, Dunk
+- 4 quarters of 60 seconds each
+- AI opponent with varying difficulty
+- Tournament mode (5 rounds) and Quick Play
+- Stat upgrade system (Accuracy, Speed, Power, Defense, Stamina)
+- Steal and block mechanics
+- Shot clock (24 seconds)
+- Sprint with stamina management
+- Swish/dunk visual effects
+- Court with proper markings (three-point lines, center circle)
+- NGN4 coin rewards and ad integration between tournament rounds
+
+File: index.html, style.css, game.js

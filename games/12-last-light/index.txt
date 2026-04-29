@@ -1,0 +1,42 @@
+NGN4 Game Engine - Game #12
+Title: Last Light
+Genre: Survival
+Version: 1.0
+
+STORY:
+The sun died 47 days ago. You are the Keeper of the Last Light — maintain the flame while creatures of darkness close in. Survive 10 days and nights to keep the last beacon burning.
+
+GAMEPLAY:
+- DAY PHASE (3 minutes): Explore the world, gather resources (wood, food, scrap)
+- NIGHT PHASE (2 minutes): Return to beacon, defend against waves of dark creatures
+- Craft items during either phase to help survival
+- Survive all 10 days to win
+
+FEATURES:
+- Day/night cycle with visual transitions
+- 3 resource types scattered across the map
+- 4 craftable items: Torch (wards enemies), Wall (barrier), Turret (auto-attacks), Health Pack
+- 5 enemy types with scaling difficulty per day
+- Stamina system for sprinting
+- Minimap showing resources, enemies, and structures
+- Particle effects for gathering and combat
+- 10 days of increasing challenge
+
+CONTROLS:
+WASD - Move
+Shift - Sprint (uses stamina)
+E/Space - Attack nearby enemies
+1 - Craft Torch (2 wood)
+2 - Craft Wall (3 wood + 2 scrap)
+3 - Craft Turret (5 scrap + 2 wood)
+4 - Craft Health Pack (3 food)
+
+REWARDS:
++5 coins per resource gathered
++20 coins per enemy killed (scales by type)
++100 coins per night survived
++500 coins bonus for completing all 10 nights
+
+AD INTEGRATION:
+- Rewarded ad after victory screen
+- Between days (extra resources opportunity)

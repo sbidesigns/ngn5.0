@@ -1,0 +1,49 @@
+NGN4 Game Engine - Game #14
+Title: Arcane Duel
+Genre: Card Battle
+Version: 1.0
+
+STORY:
+The Arcane Tournament gathers the realm's greatest duelists. Build your deck, summon creatures, cast spells — become the Archmage. Defeat all 8 opponents to claim the title.
+
+GAMEPLAY:
+- Card game vs AI opponents
+- Each player starts with 30 HP
+- Draw cards, spend mana to play cards
+- Creatures attack each turn
+- Reduce opponent HP to 0 to win
+
+CARD SCHOOLS (40 total cards):
+- FIRE (10): Direct damage, aggressive creatures
+- ICE (10): Control, freeze effects, taunt
+- NATURE (10): Healing, steady creatures, taunt
+- SHADOW (10): Debuffs, drain, growth mechanics
+
+RARITY:
+- Common: Basic cards, easy to acquire
+- Rare: Stronger effects
+- Epic: Powerful unique effects
+- Legendary: Game-changing cards
+
+FEATURES:
+- Deck builder (choose 20 from collection)
+- Mana system (increases each turn, max 10)
+- Creature cards with attack/health
+- Spell cards with instant effects
+- 8 AI opponents with themed decks
+- Card packs purchasable with coins (100 coins = 3 cards)
+- Opponent rewards (win to earn cards from their school)
+
+CONTROLS:
+Click cards in hand to play them
+Click creatures on field to attack
+End Turn button to pass turn
+
+REWARDS:
++10 coins per win, +5 per loss
+Card packs: 100 coins = 3 random cards (rarity weighted)
+Defeat opponent: Earn card from their school + bonus coins
+
+AD INTEGRATION:
+- Rewarded ad for free card pack
+- Ad between tournament rounds
